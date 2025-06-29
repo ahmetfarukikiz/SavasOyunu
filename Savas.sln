@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Desktop", "Savas\Savas.Desktop.csproj", "{723FBFBD-109E-4499-8AD5-DF5689E7E5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Library", "Savas.Library\Savas.Library.csproj", "{2D616DBA-8242-402C-AAF2-22C856D7D7CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Library2", "Savas.Library2\Savas.Library2.csproj", "{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{723FBFBD-109E-4499-8AD5-DF5689E7E5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{723FBFBD-109E-4499-8AD5-DF5689E7E5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{723FBFBD-109E-4499-8AD5-DF5689E7E5BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D616DBA-8242-402C-AAF2-22C856D7D7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D616DBA-8242-402C-AAF2-22C856D7D7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D616DBA-8242-402C-AAF2-22C856D7D7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D616DBA-8242-402C-AAF2-22C856D7D7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
