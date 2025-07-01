@@ -5,10 +5,12 @@ namespace Savas
 {
     public partial class AnaForm : Form
     {
-        private Oyun _oyun = new Oyun();
+        private Oyun _oyun;
         public AnaForm()
         {
             InitializeComponent();
+
+            _oyun = new Oyun(ucaksavarPanel);
 
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
         }
@@ -33,7 +35,7 @@ namespace Savas
         }
 
         private void Oyun_GecenSureDegisti(object sender, EventArgs e) //önce nesnenin adý sonra eventin adý
-        {    
+        {
             sureLabel.Text = _oyun.GecenSure.ToString(@"m\:ss");
         }
     }

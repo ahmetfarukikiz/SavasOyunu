@@ -31,7 +31,7 @@
             panel1 = new Panel();
             sureLabel = new Label();
             bilgiPanel = new Label();
-            panel2 = new Panel();
+            ucaksavarPanel = new Panel();
             savasAlani = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -68,14 +68,14 @@
             bilgiPanel.TabIndex = 0;
             bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\n";
             // 
-            // panel2
+            // ucaksavarPanel
             // 
-            panel2.BackColor = Color.SeaGreen;
-            panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 556);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1085, 70);
-            panel2.TabIndex = 1;
+            ucaksavarPanel.BackColor = Color.SeaGreen;
+            ucaksavarPanel.Dock = DockStyle.Bottom;
+            ucaksavarPanel.Location = new Point(0, 556);
+            ucaksavarPanel.Name = "ucaksavarPanel";
+            ucaksavarPanel.Size = new Size(1085, 70);
+            ucaksavarPanel.TabIndex = 1;
             // 
             // savasAlani
             // 
@@ -92,7 +92,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1085, 626);
             Controls.Add(savasAlani);
-            Controls.Add(panel2);
+            Controls.Add(ucaksavarPanel);
             Controls.Add(panel1);
             Name = "AnaForm";
             Text = "Savaş Oyunu";
@@ -107,7 +107,7 @@
         private Panel panel1;
         private Label sureLabel;
         private Label bilgiPanel;
-        private Panel panel2;
+        private Panel ucaksavarPanel;
         private Panel savasAlani;
     }
 }
