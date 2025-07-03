@@ -14,13 +14,16 @@ namespace Savas.Library.Concrete
     public class Oyun : IOyun
     {
         #region Alanlar
+
         private bool yeniBasildi = false;
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
+        private readonly Timer _hareketTimer = new Timer { Interval = 100 };
         private TimeSpan _gecenSure;
         private readonly Panel _ucaksavarPanel;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
         private readonly List<Mermi> _mermiler = new List<Mermi>(); 
+
         #endregion
 
         #region olaylar
@@ -48,6 +51,8 @@ namespace Savas.Library.Concrete
             _ucaksavarPanel = ucaksavarPanel;
             _savasAlaniPanel = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
+            _hareketTimer.Tick += HareketTimer_Tick;
+
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
@@ -55,6 +60,26 @@ namespace Savas.Library.Concrete
             GecenSure += TimeSpan.FromSeconds(1);
         }
 
+        private void HareketTimer_Tick(object sender, EventArgs e)
+        {
+            MermileriHareketEttir();
+        }
+
+        private void MermileriHareketEttir()
+        {
+            //döngüyü tersten yazdık kaymasın diye
+            for (int i = _mermiler.Count-1; i >= 0; i--) 
+            {
+                var mermi = _mermiler[i];
+                var carptiMi = mermi.HareketEttir(Yon.Yukari);
+                if (carptiMi)
+                {
+                    _mermiler.Remove(mermi);
+                    _savasAlaniPanel.Controls.Remove(mermi);
+                }
+            }
+        }
+            
         public void AtesEt()
         {
             if (!DevamEdiyorMu) return;
@@ -69,11 +94,33 @@ namespace Savas.Library.Concrete
             if (DevamEdiyorMu) return;
 
             DevamEdiyorMu = true;
-            _gecenSureTimer.Start();
+
+            ZamanliyicilariBaslat();
 
             UcaksavarOlustur();
 
 
+        }
+
+        public void ZamanliyicilariBaslat()
+        {
+            _gecenSureTimer.Start();
+            _hareketTimer.Start();
+        }
+
+        private void Bitir()
+        {
+            if (!DevamEdiyorMu) return;
+
+            DevamEdiyorMu = false;
+            ZamanliyicilariDurdur();
+
+        }
+
+        public void ZamanliyicilariDurdur()
+        {
+            _gecenSureTimer.Stop();
+            _hareketTimer.Stop();
         }
 
         private void UcaksavarOlustur()
@@ -86,13 +133,7 @@ namespace Savas.Library.Concrete
             _ucaksavarPanel.Controls.Add(_ucaksavar);
         }
 
-        private void Bitir()            
-        {
-            if (!DevamEdiyorMu) return;
-      
-            DevamEdiyorMu = false;
-            _gecenSureTimer.Stop();
-        }
+       
 
         public async void UcaksavariHareketEttir(Yon yon)
         {
@@ -104,7 +145,7 @@ namespace Savas.Library.Concrete
             _ucaksavar.HareketEttir(yon);
 
             yeniBasildi = true;
-            await Task.Delay(45);
+            await Task.Delay(1);
             yeniBasildi = false;
         }
 
