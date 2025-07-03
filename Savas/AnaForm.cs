@@ -10,13 +10,15 @@ namespace Savas
         {
             InitializeComponent();
 
-            _oyun = new Oyun(ucaksavarPanel);
+            _oyun = new Oyun(ucaksavarPanel, savasAlaniPanel);
 
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
         }
 
         private void AnaForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!_oyun.DevamEdiyorMu && e.KeyCode != Keys.Enter) return;
+
             switch (e.KeyCode)
             {
                 case Keys.Enter:
@@ -26,6 +28,12 @@ namespace Savas
                     _oyun.UcaksavariHareketEttir(Yon.Saga);
                     break;
                 case Keys.Left:
+                    _oyun.UcaksavariHareketEttir(Yon.Sola);
+                    break;
+                case Keys.D:
+                    _oyun.UcaksavariHareketEttir(Yon.Saga);
+                    break;
+                case Keys.A:
                     _oyun.UcaksavariHareketEttir(Yon.Sola);
                     break;
                 case Keys.Space:

@@ -13,7 +13,6 @@ namespace Savas.Library2.Concrete
         {   
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
-            SizeMode = PictureBoxSizeMode.StretchImage;
             HareketMesafesi = Width-40;
         }
     }

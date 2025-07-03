@@ -32,7 +32,7 @@
             sureLabel = new Label();
             bilgiPanel = new Label();
             ucaksavarPanel = new Panel();
-            savasAlani = new Panel();
+            savasAlaniPanel = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,21 +77,21 @@
             ucaksavarPanel.Size = new Size(1085, 70);
             ucaksavarPanel.TabIndex = 1;
             // 
-            // savasAlani
+            // savasAlaniPanel
             // 
-            savasAlani.BackColor = Color.SteelBlue;
-            savasAlani.Dock = DockStyle.Fill;
-            savasAlani.Location = new Point(0, 85);
-            savasAlani.Name = "savasAlani";
-            savasAlani.Size = new Size(1085, 471);
-            savasAlani.TabIndex = 2;
+            savasAlaniPanel.BackColor = Color.SteelBlue;
+            savasAlaniPanel.Dock = DockStyle.Fill;
+            savasAlaniPanel.Location = new Point(0, 85);
+            savasAlaniPanel.Name = "savasAlaniPanel";
+            savasAlaniPanel.Size = new Size(1085, 471);
+            savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1085, 626);
-            Controls.Add(savasAlani);
+            Controls.Add(savasAlaniPanel);
             Controls.Add(ucaksavarPanel);
             Controls.Add(panel1);
             Name = "AnaForm";
@@ -108,6 +108,6 @@
         private Label sureLabel;
         private Label bilgiPanel;
         private Panel ucaksavarPanel;
-        private Panel savasAlani;
+        private Panel savasAlaniPanel;
     }
 }
