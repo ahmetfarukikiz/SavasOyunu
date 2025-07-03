@@ -14,10 +14,10 @@ namespace Savas.Library.Concrete
     public class Oyun : IOyun
     {
         #region Alanlar
-
-        private bool yeniBasildi = false;
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
         private readonly Timer _hareketTimer = new Timer { Interval = 100 };
+        private readonly Timer _AnimasyonluResim = new Timer { Interval = 80 };
+
         private TimeSpan _gecenSure;
         private readonly Panel _ucaksavarPanel;
         private readonly Panel _savasAlaniPanel;
@@ -52,7 +52,13 @@ namespace Savas.Library.Concrete
             _savasAlaniPanel = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _hareketTimer.Tick += HareketTimer_Tick;
+            _AnimasyonluResim.Tick += AnimasyonluResim_Tick;
 
+        }
+
+        private void AnimasyonluResim_Tick(object? sender, EventArgs e)
+        {
+            MermilerinResimleriniDegistir();
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
@@ -63,6 +69,7 @@ namespace Savas.Library.Concrete
         private void HareketTimer_Tick(object sender, EventArgs e)
         {
             MermileriHareketEttir();
+      
         }
 
         private void MermileriHareketEttir()
@@ -77,6 +84,14 @@ namespace Savas.Library.Concrete
                     _mermiler.Remove(mermi);
                     _savasAlaniPanel.Controls.Remove(mermi);
                 }
+            }
+        }
+
+        private void MermilerinResimleriniDegistir()
+        {
+            foreach(var mermi in _mermiler)
+            {
+                mermi.AnimasyonluResimAyarla();
             }
         }
             
@@ -106,6 +121,7 @@ namespace Savas.Library.Concrete
         {
             _gecenSureTimer.Start();
             _hareketTimer.Start();
+            _AnimasyonluResim.Start();
         }
 
         private void Bitir()
@@ -121,6 +137,8 @@ namespace Savas.Library.Concrete
         {
             _gecenSureTimer.Stop();
             _hareketTimer.Stop();
+            _AnimasyonluResim.Stop();
+
         }
 
         private void UcaksavarOlustur()
@@ -135,18 +153,13 @@ namespace Savas.Library.Concrete
 
        
 
-        public async void UcaksavariHareketEttir(Yon yon)
+        public void UcaksavariHareketEttir(Yon yon)
         {
 
             if (!DevamEdiyorMu) return;
 
-            if (yeniBasildi == true) return;
-
             _ucaksavar.HareketEttir(yon);
 
-            yeniBasildi = true;
-            await Task.Delay(1);
-            yeniBasildi = false;
         }
 
         #endregion

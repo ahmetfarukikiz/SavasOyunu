@@ -7,15 +7,10 @@ namespace Savas.Library2.Concrete
     {
         private static readonly string[] mermiResimleri = { "mermi1", "mermi2", "mermi3" };
         private int mermiResmiIndexi = 0;
-        private readonly Timer _mermiResimTimer = new Timer { Interval = 50 };
 
         public Mermi(Size hareketAlaniBoyutlari, int namluOrtasiX) : base(hareketAlaniBoyutlari)
         {
             BaslangicKonumunuAyarla(namluOrtasiX);
-
-            _mermiResimTimer.Tick += MermiResimTimer_Tick;
-            _mermiResimTimer.Start();
-
         }
 
         private void BaslangicKonumunuAyarla(int namluOrtasiX)
@@ -25,14 +20,13 @@ namespace Savas.Library2.Concrete
             HareketMesafesi = (int)(Height * 1.5); 
         }
 
-        private void MermiResimTimer_Tick(object sender, EventArgs e)
+        public void AnimasyonluResimAyarla()
         {
-         
             Image = Image.FromFile($@"images\{mermiResimleri[mermiResmiIndexi]}.png");
-            if(mermiResmiIndexi < 2) mermiResmiIndexi++;
+            if (mermiResmiIndexi < 2) mermiResmiIndexi++;
             if (mermiResmiIndexi == 2) mermiResmiIndexi = 0;
-
-
         }
+
+       
     }
 }
