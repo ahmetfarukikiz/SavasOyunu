@@ -44,15 +44,16 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1085, 85);
+            panel1.Size = new Size(1488, 85);
             panel1.TabIndex = 0;
             // 
             // sureLabel
             // 
+            sureLabel.Dock = DockStyle.Right;
             sureLabel.Font = new Font("Segoe UI", 10F);
-            sureLabel.Location = new Point(974, 14);
+            sureLabel.Location = new Point(1389, 0);
             sureLabel.Name = "sureLabel";
-            sureLabel.Size = new Size(99, 48);
+            sureLabel.Size = new Size(99, 85);
             sureLabel.TabIndex = 1;
             sureLabel.Text = "0:00";
             sureLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -60,21 +61,21 @@
             // bilgiPanel
             // 
             bilgiPanel.AutoSize = true;
-            bilgiPanel.Font = new Font("Segoe UI", 12F);
+            bilgiPanel.Font = new Font("Segoe UI", 11F);
             bilgiPanel.ForeColor = SystemColors.ButtonFace;
-            bilgiPanel.Location = new Point(12, 9);
+            bilgiPanel.Location = new Point(3, 0);
             bilgiPanel.Name = "bilgiPanel";
-            bilgiPanel.Size = new Size(362, 28);
+            bilgiPanel.Size = new Size(540, 175);
             bilgiPanel.TabIndex = 0;
-            bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\n";
+            bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\nHareket Etmek İçin: Yön tuşları veya \"A\" ve \"D\" tuşlarını kullanın\r\nAteş Etmek için boşluk (space) tuşunu kullanın\r\n\r\n\r\n\r\n\r\n";
             // 
             // ucaksavarPanel
             // 
             ucaksavarPanel.BackColor = Color.SeaGreen;
             ucaksavarPanel.Dock = DockStyle.Bottom;
-            ucaksavarPanel.Location = new Point(0, 556);
+            ucaksavarPanel.Location = new Point(0, 826);
             ucaksavarPanel.Name = "ucaksavarPanel";
-            ucaksavarPanel.Size = new Size(1085, 70);
+            ucaksavarPanel.Size = new Size(1488, 70);
             ucaksavarPanel.TabIndex = 1;
             // 
             // savasAlaniPanel
@@ -83,19 +84,23 @@
             savasAlaniPanel.Dock = DockStyle.Fill;
             savasAlaniPanel.Location = new Point(0, 85);
             savasAlaniPanel.Name = "savasAlaniPanel";
-            savasAlaniPanel.Size = new Size(1085, 471);
+            savasAlaniPanel.Size = new Size(1488, 741);
             savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1085, 626);
+            ClientSize = new Size(1488, 896);
             Controls.Add(savasAlaniPanel);
             Controls.Add(ucaksavarPanel);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "AnaForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "Savaş Oyunu";
+            WindowState = FormWindowState.Maximized;
             KeyDown += AnaForm_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
