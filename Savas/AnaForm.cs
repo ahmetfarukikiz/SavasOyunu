@@ -1,44 +1,66 @@
 using Savas.Library.Concrete;
 using Savas.Library.Enum;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Savas
 {
     public partial class AnaForm : Form
     {
+        private readonly HashSet<Keys> _basiliTuslar = new();
+        private readonly Timer _kontrolTimer = new();
         private Oyun _oyun;
         public AnaForm()
         {
             InitializeComponent();
             _oyun = new Oyun(ucaksavarPanel, savasAlaniPanel);
-
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
+
+            // Timer ayarý
+            _kontrolTimer.Interval = 20; // 50 FPS gibi
+            _kontrolTimer.Tick += KontrolTimer_Tick;
+            _kontrolTimer.Start();
+
+            // Formun klavye olaylarýný alabilmesi için:
+            this.KeyPreview = true;
+            this.KeyDown += AnaForm_KeyDown;
+            this.KeyUp += AnaForm_KeyUp;
         }
 
         private void AnaForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (!_oyun.DevamEdiyorMu && e.KeyCode != Keys.Enter) return;
 
-            switch (e.KeyCode)
+            if (e.KeyCode == Keys.Enter)
             {
-                case Keys.Enter:
-                    _oyun.Baslat();
-                    break;
-                case Keys.Right:
-                    _oyun.UcaksavariHareketEttir(Yon.Saga);
-                    break;
-                case Keys.Left:
-                    _oyun.UcaksavariHareketEttir(Yon.Sola);
-                    break;
-                case Keys.D:
-                    _oyun.UcaksavariHareketEttir(Yon.Saga);
-                    break;
-                case Keys.A:
-                    _oyun.UcaksavariHareketEttir(Yon.Sola);
-                    break;
-                case Keys.Space:
-                    _oyun.AtesEt();
-                    break;
+                _oyun.Baslat();
             }
+
+            _basiliTuslar.Add(e.KeyCode);
+        }
+
+        private void KontrolTimer_Tick(object sender, EventArgs e)
+        {
+            if (!_oyun.DevamEdiyorMu) return;
+
+            if (_basiliTuslar.Contains(Keys.Right) || _basiliTuslar.Contains(Keys.D))
+            {
+                _oyun.UcaksavariHareketEttir(Yon.Saga);
+            }
+
+            if (_basiliTuslar.Contains(Keys.Left) || _basiliTuslar.Contains(Keys.A))
+            {
+                _oyun.UcaksavariHareketEttir(Yon.Sola);
+            }
+
+            if (_basiliTuslar.Contains(Keys.Space) ||_basiliTuslar.Contains(Keys.L))
+            {
+                _oyun.AtesEt();
+            }
+        }
+
+        private void AnaForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            _basiliTuslar.Remove(e.KeyCode);
         }
 
         private void Oyun_GecenSureDegisti(object sender, EventArgs e) //önce nesnenin adý sonra eventin adý

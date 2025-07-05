@@ -13,7 +13,7 @@ namespace Savas.Library2.Concrete
         {   
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
-            HareketMesafesi = Width-40;
+            HareketMesafesi = Width-60;
         }
     }
 }

@@ -15,14 +15,15 @@ namespace Savas.Library.Concrete
     {
         #region Alanlar
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
-        private readonly Timer _hareketTimer = new Timer { Interval = 100 };
-        private readonly Timer _AnimasyonluResimTimer = new Timer { Interval = 80 };
-        private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 2000 };
+        private readonly Timer _hareketTimer = new Timer { Interval = 130 };
+        private readonly Timer _AnimasyonluResimTimer = new Timer { Interval = 60 };
+        private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 1600 };
 
         private TimeSpan _gecenSure;
         private readonly Panel _ucaksavarPanel;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
+        private bool atesEdiliyor = false;
         private readonly List<Mermi> _mermiler = new List<Mermi>();
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
 
@@ -69,6 +70,7 @@ namespace Savas.Library.Concrete
         private void AnimasyonluResim_Tick(object? sender, EventArgs e)
         {
             MermilerinResimleriniDegistir();
+      
 
         }
 
@@ -79,8 +81,8 @@ namespace Savas.Library.Concrete
 
         private void HareketTimer_Tick(object sender, EventArgs e)
         {
-            MermileriHareketEttir();
             UcaklarihareketEttir();
+            MermileriHareketEttir();
             VurulanUcaklariCikar();
         }
 
@@ -135,28 +137,44 @@ namespace Savas.Library.Concrete
             }
         }
             
-        public void AtesEt()
+        public async void AtesEt()
         {
-            if (!DevamEdiyorMu) return;
+            if (!DevamEdiyorMu || atesEdiliyor) return;
 
+            atesEdiliyor = true;
             var mermi = new Mermi(_savasAlaniPanel.Size, _ucaksavar.Center);
             _mermiler.Add(mermi);
             _savasAlaniPanel.Controls.Add(mermi);
+            await Task.Delay(200); // 200ms cooldown
+            atesEdiliyor = false;
         }
 
         public void Baslat()
         {
             if (DevamEdiyorMu) return;
 
+            Sifirla();
+
             DevamEdiyorMu = true;
 
             ZamanliyicilariBaslat();
 
             UcaksavarOlustur();
-           
+
+          
         
 
         }
+
+        private void Sifirla()
+        {
+            _ucaklar.Clear();
+            _mermiler.Clear();
+            _savasAlaniPanel.Controls.Clear();
+            _ucaksavarPanel.Controls.Clear();
+            GecenSure = TimeSpan.Zero;
+        }
+
         private void Bitir()
         {
             if (!DevamEdiyorMu) return;

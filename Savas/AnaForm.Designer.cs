@@ -44,7 +44,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1488, 85);
+            panel1.Size = new Size(1488, 26);
             panel1.TabIndex = 0;
             // 
             // sureLabel
@@ -53,7 +53,7 @@
             sureLabel.Font = new Font("Segoe UI", 10F);
             sureLabel.Location = new Point(1389, 0);
             sureLabel.Name = "sureLabel";
-            sureLabel.Size = new Size(99, 85);
+            sureLabel.Size = new Size(99, 26);
             sureLabel.TabIndex = 1;
             sureLabel.Text = "0:00";
             sureLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -82,9 +82,9 @@
             // 
             savasAlaniPanel.BackColor = Color.SkyBlue;
             savasAlaniPanel.Dock = DockStyle.Fill;
-            savasAlaniPanel.Location = new Point(0, 85);
+            savasAlaniPanel.Location = new Point(0, 26);
             savasAlaniPanel.Name = "savasAlaniPanel";
-            savasAlaniPanel.Size = new Size(1488, 741);
+            savasAlaniPanel.Size = new Size(1488, 800);
             savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm
