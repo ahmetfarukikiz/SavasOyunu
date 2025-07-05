@@ -38,7 +38,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.SteelBlue;
             panel1.Controls.Add(sureLabel);
             panel1.Controls.Add(bilgiPanel);
             panel1.Dock = DockStyle.Top;
@@ -71,7 +71,7 @@
             // 
             // ucaksavarPanel
             // 
-            ucaksavarPanel.BackColor = Color.SeaGreen;
+            ucaksavarPanel.BackColor = Color.SkyBlue;
             ucaksavarPanel.Dock = DockStyle.Bottom;
             ucaksavarPanel.Location = new Point(0, 826);
             ucaksavarPanel.Name = "ucaksavarPanel";
@@ -80,7 +80,7 @@
             // 
             // savasAlaniPanel
             // 
-            savasAlaniPanel.BackColor = Color.SteelBlue;
+            savasAlaniPanel.BackColor = Color.SkyBlue;
             savasAlaniPanel.Dock = DockStyle.Fill;
             savasAlaniPanel.Location = new Point(0, 85);
             savasAlaniPanel.Name = "savasAlaniPanel";

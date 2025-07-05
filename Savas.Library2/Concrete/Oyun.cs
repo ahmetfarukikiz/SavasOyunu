@@ -16,13 +16,16 @@ namespace Savas.Library.Concrete
         #region Alanlar
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
         private readonly Timer _hareketTimer = new Timer { Interval = 100 };
-        private readonly Timer _AnimasyonluResim = new Timer { Interval = 80 };
+        private readonly Timer _AnimasyonluResimTimer = new Timer { Interval = 80 };
+        private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 2000 };
 
         private TimeSpan _gecenSure;
         private readonly Panel _ucaksavarPanel;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
-        private readonly List<Mermi> _mermiler = new List<Mermi>(); 
+        private readonly List<Mermi> _mermiler = new List<Mermi>();
+        private readonly List<Ucak> _ucaklar = new List<Ucak>();
+
 
         #endregion
 
@@ -52,8 +55,15 @@ namespace Savas.Library.Concrete
             _savasAlaniPanel = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _hareketTimer.Tick += HareketTimer_Tick;
-            _AnimasyonluResim.Tick += AnimasyonluResim_Tick;
+            _AnimasyonluResimTimer.Tick += AnimasyonluResim_Tick;
+            _UcakOlusturmaTimer.Tick += UcakOlusturma_Tick;
 
+
+        }
+
+        private void UcakOlusturma_Tick(object? sender, EventArgs e)
+        {
+            UcakOlustur();
         }
 
         private void AnimasyonluResim_Tick(object? sender, EventArgs e)
@@ -113,17 +123,9 @@ namespace Savas.Library.Concrete
             ZamanliyicilariBaslat();
 
             UcaksavarOlustur();
-
+        
 
         }
-
-        public void ZamanliyicilariBaslat()
-        {
-            _gecenSureTimer.Start();
-            _hareketTimer.Start();
-            _AnimasyonluResim.Start();
-        }
-
         private void Bitir()
         {
             if (!DevamEdiyorMu) return;
@@ -133,11 +135,24 @@ namespace Savas.Library.Concrete
 
         }
 
+        
+
+        public void ZamanliyicilariBaslat()
+        {
+            _UcakOlusturmaTimer.Start();
+            _gecenSureTimer.Start();
+            _hareketTimer.Start();
+            _AnimasyonluResimTimer.Start();
+        }
+
+       
+
         public void ZamanliyicilariDurdur()
         {
+            _UcakOlusturmaTimer.Stop();
             _gecenSureTimer.Stop();
             _hareketTimer.Stop();
-            _AnimasyonluResim.Stop();
+            _AnimasyonluResimTimer.Stop();
 
         }
 
@@ -151,7 +166,12 @@ namespace Savas.Library.Concrete
             _ucaksavarPanel.Controls.Add(_ucaksavar);
         }
 
-       
+        private void UcakOlustur()
+        {
+            var ucak = new Ucak(_savasAlaniPanel.Size);
+            _savasAlaniPanel.Controls.Add(ucak);
+        }
+
 
         public void UcaksavariHareketEttir(Yon yon)
         {
