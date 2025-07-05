@@ -15,5 +15,17 @@ internal class Ucak : Cisim
     {
         
         Left = Random.Next(hareketAlaniBoyutlari.Width - Width + 1);
+        HareketMesafesi = (int)(Height * 0.2);
+    }
+
+    public Mermi? VurulduMu(List<Mermi> mermiler)
+    {
+        foreach(var mermi in mermiler)
+        {
+            var vurulduMu = mermi.Top < Bottom && mermi.Right > Left && mermi.Left < Right;
+            if (vurulduMu) return mermi;
+        }
+
+        return null;
     }
 }

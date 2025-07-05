@@ -69,6 +69,7 @@ namespace Savas.Library.Concrete
         private void AnimasyonluResim_Tick(object? sender, EventArgs e)
         {
             MermilerinResimleriniDegistir();
+
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
@@ -79,7 +80,36 @@ namespace Savas.Library.Concrete
         private void HareketTimer_Tick(object sender, EventArgs e)
         {
             MermileriHareketEttir();
-      
+            UcaklarihareketEttir();
+            VurulanUcaklariCikar();
+        }
+
+        private void VurulanUcaklariCikar()
+        {
+            for (var i = _ucaklar.Count - 1; i >= 0; i--)
+            {
+                var ucak = _ucaklar[i];
+
+                var vuranMermi = ucak.VurulduMu(_mermiler);
+                if (vuranMermi is null) continue;
+
+                _ucaklar.Remove(ucak);
+                _mermiler.Remove(vuranMermi);
+                _savasAlaniPanel.Controls.Remove(ucak);
+                _savasAlaniPanel.Controls.Remove(vuranMermi);
+            }
+        }
+
+        private void UcaklarihareketEttir()
+        {
+            foreach(var ucak in _ucaklar)
+            {
+               var carptiMi = ucak.HareketEttir(Yon.Asagi);
+                if (!carptiMi) continue;
+
+                Bitir();
+                break;
+            }
         }
 
         private void MermileriHareketEttir()
@@ -123,6 +153,7 @@ namespace Savas.Library.Concrete
             ZamanliyicilariBaslat();
 
             UcaksavarOlustur();
+           
         
 
         }
@@ -169,6 +200,7 @@ namespace Savas.Library.Concrete
         private void UcakOlustur()
         {
             var ucak = new Ucak(_savasAlaniPanel.Size);
+            _ucaklar.Add(ucak);
             _savasAlaniPanel.Controls.Add(ucak);
         }
 
