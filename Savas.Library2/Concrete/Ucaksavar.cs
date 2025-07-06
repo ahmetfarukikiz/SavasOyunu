@@ -50,7 +50,18 @@ namespace Savas.Library2.Concrete
             }
 
             return null;
+        }
 
+        internal async void UcakSavarCarpti()
+        {
+            var eskiHareketMesafesi = HareketMesafesi;
+            var eskiYatayHareketMesafesi = YatayHareketMesafesi;
+
+            HareketMesafesi = (int)(HareketMesafesi * 0.3);
+            YatayHareketMesafesi = (int)(YatayHareketMesafesi * 0.3);
+            await Task.Delay(300);
+            HareketMesafesi = eskiHareketMesafesi;
+            YatayHareketMesafesi = eskiYatayHareketMesafesi;
         }
     }
 }

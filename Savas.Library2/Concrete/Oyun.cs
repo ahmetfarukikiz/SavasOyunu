@@ -34,6 +34,7 @@ namespace Savas.Library.Concrete
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
         private Yildiz _yildiz;
         private int _puan;
+        private bool yeniCarpisildi;
 
 
         #endregion
@@ -41,6 +42,7 @@ namespace Savas.Library.Concrete
         #region olaylar
         public event EventHandler GecenSureDegisti;
         public event EventHandler PuanDegisti;
+        public event EventHandler OyunBitti;
         #endregion
 
         #region Özellikler
@@ -63,7 +65,9 @@ namespace Savas.Library.Concrete
             get => _puan; 
             private set 
             {
+                if (Puan < 0) return; 
                 _puan = value;
+                if(Puan < 0) _puan = 0;
 
                 PuanDegisti?.Invoke(this, EventArgs.Empty);
             }
@@ -101,11 +105,23 @@ namespace Savas.Library.Concrete
         private void HizliHareket_Tick(object? sender, EventArgs e)
         {
             if (_ucaksavar.yakalandiMi(_yildiz)) { YildizEfekti(); YildiziSil(); }
-            if (_ucaksavar.CarptiMi(_ucaklar) is not null) UcagiSil(_ucaksavar.CarptiMi(_ucaklar));
+            if (_ucaksavar.CarptiMi(_ucaklar) is not null) UcaksavarUcaklaCarpisti();
 
             MermilerinResimleriniDegistir();
             MermileriHareketEttir();
             YildizlariHareketEttir();
+        }
+
+        private async void UcaksavarUcaklaCarpisti()
+        {
+            if (yeniCarpisildi == true) return;
+            yeniCarpisildi = true;
+            _ucaksavar.UcakSavarCarpti(); 
+            UcagiSil(_ucaksavar.CarptiMi(_ucaklar));
+            Puan -= 5;
+            await Task.Delay(400);
+            yeniCarpisildi = false;
+           
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
@@ -140,7 +156,7 @@ namespace Savas.Library.Concrete
         private async void UcagiSil(Ucak ucak)
         {
             ucak.UcagiPatlat();
-            await Task.Delay(500);
+            await Task.Delay(400);
             _ucaklar.Remove(ucak);
             _savasAlaniPanel.Controls.Remove(ucak);
         }
@@ -224,8 +240,9 @@ namespace Savas.Library.Concrete
             if (!DevamEdiyorMu) return;
 
             DevamEdiyorMu = false;
+            OyunBitti?.Invoke(this, EventArgs.Empty);
             ZamanliyicilariDurdur();
-
+           
         }
 
         
@@ -252,7 +269,6 @@ namespace Savas.Library.Concrete
 
         private void YildizOlustur()
         {
-
             _yildiz = new Yildiz(_savasAlaniPanel.Size);
             _savasAlaniPanel.Controls.Add(_yildiz);
         }

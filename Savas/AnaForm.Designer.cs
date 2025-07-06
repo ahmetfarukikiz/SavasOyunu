@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            puanLabel = new Label();
             sureLabel = new Label();
             bilgiPanel = new Label();
             savasAlaniPanel = new Panel();
-            puanLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -47,6 +47,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1488, 74);
             panel1.TabIndex = 0;
+            // 
+            // puanLabel
+            // 
+            puanLabel.Dock = DockStyle.Right;
+            puanLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
+            puanLabel.ForeColor = SystemColors.ButtonFace;
+            puanLabel.Location = new Point(1257, 0);
+            puanLabel.Name = "puanLabel";
+            puanLabel.Size = new Size(132, 74);
+            puanLabel.TabIndex = 2;
+            puanLabel.Text = "Puan: 0";
+            puanLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // sureLabel
             // 
@@ -65,11 +77,11 @@
             bilgiPanel.AutoSize = true;
             bilgiPanel.Font = new Font("Segoe UI", 9F);
             bilgiPanel.ForeColor = SystemColors.ButtonFace;
-            bilgiPanel.Location = new Point(3, 0);
+            bilgiPanel.Location = new Point(0, 0);
             bilgiPanel.Name = "bilgiPanel";
-            bilgiPanel.Size = new Size(425, 140);
+            bilgiPanel.Size = new Size(415, 160);
             bilgiPanel.TabIndex = 0;
-            bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\nHareket Etmek İçin: Yön tuşları veya \"A\" ve \"D\" tuşlarını kullanın\r\nAteş Etmek için boşluk (space) tuşunu kullanın\r\n\r\n\r\n\r\n\r\n";
+            bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\nHareket Etmek İçin: Yön tuşları veya WASD tuşlarını kullanın\r\nAteş Etmek için Boşluk (space) tuşunu veya \"L\" tuşunu kullanın\r\n\r\n\r\n\r\n\r\n\r\n";
             // 
             // savasAlaniPanel
             // 
@@ -79,18 +91,6 @@
             savasAlaniPanel.Name = "savasAlaniPanel";
             savasAlaniPanel.Size = new Size(1488, 822);
             savasAlaniPanel.TabIndex = 2;
-            // 
-            // puanLabel
-            // 
-            puanLabel.Dock = DockStyle.Right;
-            puanLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
-            puanLabel.ForeColor = SystemColors.ButtonFace;
-            puanLabel.Location = new Point(1257, 0);
-            puanLabel.Name = "puanLabel";
-            puanLabel.Size = new Size(132, 74);
-            puanLabel.TabIndex = 2;
-            puanLabel.Text = "Puan: 0";
-            puanLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // AnaForm
             // 

@@ -15,6 +15,7 @@ namespace Savas
             _oyun = new Oyun(savasAlaniPanel);
             _oyun.PuanDegisti += Oyun_PuanDegisti;
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
+            _oyun.OyunBitti += Oyun_OyunBitti;
 
             // Timer ayarý
             _kontrolTimer.Interval = 20; // 50 FPS gibi
@@ -25,6 +26,12 @@ namespace Savas
             this.KeyPreview = true;
             this.KeyDown += AnaForm_KeyDown;
             this.KeyUp += AnaForm_KeyUp;
+       
+            
+        }
+
+        private void Oyun_OyunBitti(object sender, EventArgs e)
+        {
         }
 
         private void AnaForm_KeyDown(object sender, KeyEventArgs e)
@@ -84,5 +91,7 @@ namespace Savas
         {
             puanLabel.Text = $"Puan: {_oyun.Puan}";
         }
+
+
     }
 }
