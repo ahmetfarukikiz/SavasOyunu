@@ -11,13 +11,20 @@ using Savas.Library2.Concrete;
 
 namespace Savas.Library.Concrete
 {
+   
+
     public class Oyun : IOyun
     {
+
+
         #region Alanlar
+        private const int DEFATESGECİKMESİ = 400;
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
         private readonly Timer _hareketTimer = new Timer { Interval = 130 };
         private readonly Timer _AnimasyonluResimTimer = new Timer { Interval = 60 };
         private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 1600 };
+        private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 30000 };
+
 
         private TimeSpan _gecenSure;
         private readonly Panel _ucaksavarPanel;
@@ -26,6 +33,7 @@ namespace Savas.Library.Concrete
         private bool atesEdiliyor = false;
         private readonly List<Mermi> _mermiler = new List<Mermi>();
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
+        private Yildiz _yildiz;
 
 
         #endregion
@@ -36,6 +44,8 @@ namespace Savas.Library.Concrete
 
         #region Özellikler
         public bool DevamEdiyorMu { get; private set; } = false; //private set bu sınıftan atayaabiliriz değer
+        public int AtesGecikmesi { get; private set; } = DEFATESGECİKMESİ;
+
         public TimeSpan GecenSure
         {
             get => _gecenSure;
@@ -55,23 +65,31 @@ namespace Savas.Library.Concrete
             _ucaksavarPanel = ucaksavarPanel;
             _savasAlaniPanel = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
-            _hareketTimer.Tick += HareketTimer_Tick;
-            _AnimasyonluResimTimer.Tick += AnimasyonluResim_Tick;
+            _hareketTimer.Tick += YavasHareketTimer_Tick;
+            _AnimasyonluResimTimer.Tick += HizliHareket_Tick;
             _UcakOlusturmaTimer.Tick += UcakOlusturma_Tick;
+            _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
 
 
         }
+
+        private void YildizOlusturma_Tick(object? sender, EventArgs e)
+        {
+            YildizOlustur();
+        }
+
+        
 
         private void UcakOlusturma_Tick(object? sender, EventArgs e)
         {
             UcakOlustur();
         }
 
-        private void AnimasyonluResim_Tick(object? sender, EventArgs e)
+        private void HizliHareket_Tick(object? sender, EventArgs e)
         {
             MermilerinResimleriniDegistir();
-      
-
+            MermileriHareketEttir();
+            YildizlariHareketEttir();
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
@@ -79,10 +97,9 @@ namespace Savas.Library.Concrete
             GecenSure += TimeSpan.FromSeconds(1);
         }
 
-        private void HareketTimer_Tick(object sender, EventArgs e)
+        private void YavasHareketTimer_Tick(object sender, EventArgs e)
         {
             UcaklarihareketEttir();
-            MermileriHareketEttir();
             VurulanUcaklariCikar();
         }
 
@@ -145,7 +162,7 @@ namespace Savas.Library.Concrete
             var mermi = new Mermi(_savasAlaniPanel.Size, _ucaksavar.Center);
             _mermiler.Add(mermi);
             _savasAlaniPanel.Controls.Add(mermi);
-            await Task.Delay(200); // 200ms cooldown
+            await Task.Delay(AtesGecikmesi);
             atesEdiliyor = false;
         }
 
@@ -161,8 +178,9 @@ namespace Savas.Library.Concrete
 
             UcaksavarOlustur();
 
-          
-        
+         
+
+
 
         }
 
@@ -173,6 +191,7 @@ namespace Savas.Library.Concrete
             _savasAlaniPanel.Controls.Clear();
             _ucaksavarPanel.Controls.Clear();
             GecenSure = TimeSpan.Zero;
+            AtesGecikmesi = DEFATESGECİKMESİ;
         }
 
         private void Bitir()
@@ -192,6 +211,7 @@ namespace Savas.Library.Concrete
             _gecenSureTimer.Start();
             _hareketTimer.Start();
             _AnimasyonluResimTimer.Start();
+            _YildizOlusturmaTimer.Start();
         }
 
        
@@ -202,7 +222,34 @@ namespace Savas.Library.Concrete
             _gecenSureTimer.Stop();
             _hareketTimer.Stop();
             _AnimasyonluResimTimer.Stop();
+            _YildizOlusturmaTimer.Stop();
+        }
 
+        private void YildizOlustur()
+        {
+
+            _yildiz = new Yildiz(_savasAlaniPanel.Size);
+            _savasAlaniPanel.Controls.Add(_yildiz);
+        }
+
+        private void YildizlariHareketEttir()
+        {
+            if (_yildiz is null) return;
+             var carptiMi = _yildiz.HareketEttir(Yon.Asagi);
+
+            if(carptiMi)
+            {
+                if (_ucaksavar.yakalandiMi(_yildiz)) YildizEfekti();
+                _savasAlaniPanel.Controls.Remove(_yildiz);
+                _yildiz = null;
+            }
+        }
+
+        private async void YildizEfekti()
+        {
+            AtesGecikmesi = 70;
+            await Task.Delay(7000); //7 sn sürecek
+            AtesGecikmesi = DEFATESGECİKMESİ;
         }
 
         private void UcaksavarOlustur()

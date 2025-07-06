@@ -1,5 +1,4 @@
 ﻿using Savas.Library2.Abstract;
-using Timer = System.Windows.Forms.Timer;
 
 namespace Savas.Library2.Concrete
 {

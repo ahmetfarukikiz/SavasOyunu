@@ -44,16 +44,17 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1488, 26);
+            panel1.Size = new Size(1488, 74);
             panel1.TabIndex = 0;
             // 
             // sureLabel
             // 
             sureLabel.Dock = DockStyle.Right;
-            sureLabel.Font = new Font("Segoe UI", 10F);
+            sureLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
+            sureLabel.ForeColor = SystemColors.ButtonFace;
             sureLabel.Location = new Point(1389, 0);
             sureLabel.Name = "sureLabel";
-            sureLabel.Size = new Size(99, 26);
+            sureLabel.Size = new Size(99, 74);
             sureLabel.TabIndex = 1;
             sureLabel.Text = "0:00";
             sureLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -61,11 +62,11 @@
             // bilgiPanel
             // 
             bilgiPanel.AutoSize = true;
-            bilgiPanel.Font = new Font("Segoe UI", 11F);
+            bilgiPanel.Font = new Font("Segoe UI", 9F);
             bilgiPanel.ForeColor = SystemColors.ButtonFace;
             bilgiPanel.Location = new Point(3, 0);
             bilgiPanel.Name = "bilgiPanel";
-            bilgiPanel.Size = new Size(540, 175);
+            bilgiPanel.Size = new Size(425, 140);
             bilgiPanel.TabIndex = 0;
             bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\nHareket Etmek İçin: Yön tuşları veya \"A\" ve \"D\" tuşlarını kullanın\r\nAteş Etmek için boşluk (space) tuşunu kullanın\r\n\r\n\r\n\r\n\r\n";
             // 
@@ -73,18 +74,18 @@
             // 
             ucaksavarPanel.BackColor = Color.SkyBlue;
             ucaksavarPanel.Dock = DockStyle.Bottom;
-            ucaksavarPanel.Location = new Point(0, 826);
+            ucaksavarPanel.Location = new Point(0, 812);
             ucaksavarPanel.Name = "ucaksavarPanel";
-            ucaksavarPanel.Size = new Size(1488, 70);
+            ucaksavarPanel.Size = new Size(1488, 84);
             ucaksavarPanel.TabIndex = 1;
             // 
             // savasAlaniPanel
             // 
             savasAlaniPanel.BackColor = Color.SkyBlue;
             savasAlaniPanel.Dock = DockStyle.Fill;
-            savasAlaniPanel.Location = new Point(0, 26);
+            savasAlaniPanel.Location = new Point(0, 74);
             savasAlaniPanel.Name = "savasAlaniPanel";
-            savasAlaniPanel.Size = new Size(1488, 800);
+            savasAlaniPanel.Size = new Size(1488, 738);
             savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm

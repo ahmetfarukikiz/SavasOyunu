@@ -15,5 +15,11 @@ namespace Savas.Library2.Concrete
             Center = panelGenisligi / 2;
             HareketMesafesi = Width-60;
         }
+
+        internal bool yakalandiMi(Yildiz yildiz)
+        {
+            var yakalandiMi = (yildiz.Left > Left && yildiz.Left < Right) || yildiz.Right < Right && yildiz.Right > Left;
+            return yakalandiMi;
+        }
     }
 }

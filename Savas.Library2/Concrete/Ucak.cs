@@ -25,7 +25,7 @@ internal class Ucak : Cisim
             var vurulduMu = mermi.Top < Bottom && mermi.Right > Left && mermi.Left < Right;
             if (vurulduMu) return mermi;
         }
-
+       
         return null;
     }
 }
