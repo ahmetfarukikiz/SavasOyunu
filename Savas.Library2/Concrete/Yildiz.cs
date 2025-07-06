@@ -14,7 +14,7 @@ namespace Savas.Library2.Concrete
         public Yildiz(Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
         {
             Left = Random.Next(hareketAlaniBoyutlari.Width - Width + 1);
-            HareketMesafesi = (int)(Height * 0.15);
+            HareketMesafesi = (int)(Height * 0.25);
         }
     }
 }

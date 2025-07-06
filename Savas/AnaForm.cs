@@ -13,6 +13,7 @@ namespace Savas
         {
             InitializeComponent();
             _oyun = new Oyun(savasAlaniPanel);
+            _oyun.PuanDegisti += Oyun_PuanDegisti;
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
 
             // Timer ayarý
@@ -77,6 +78,11 @@ namespace Savas
         private void Oyun_GecenSureDegisti(object sender, EventArgs e) //önce nesnenin adý sonra eventin adý
         {
             sureLabel.Text = _oyun.GecenSure.ToString(@"m\:ss");
+        }
+
+        private void Oyun_PuanDegisti(object sender, EventArgs e) //önce nesnenin adý sonra eventin adý
+        {
+            puanLabel.Text = $"Puan: {_oyun.Puan}";
         }
     }
 }

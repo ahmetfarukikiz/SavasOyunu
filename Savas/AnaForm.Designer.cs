@@ -32,12 +32,14 @@
             sureLabel = new Label();
             bilgiPanel = new Label();
             savasAlaniPanel = new Panel();
+            puanLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
+            panel1.Controls.Add(puanLabel);
             panel1.Controls.Add(sureLabel);
             panel1.Controls.Add(bilgiPanel);
             panel1.Dock = DockStyle.Top;
@@ -78,6 +80,18 @@
             savasAlaniPanel.Size = new Size(1488, 822);
             savasAlaniPanel.TabIndex = 2;
             // 
+            // puanLabel
+            // 
+            puanLabel.Dock = DockStyle.Right;
+            puanLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
+            puanLabel.ForeColor = SystemColors.ButtonFace;
+            puanLabel.Location = new Point(1257, 0);
+            puanLabel.Name = "puanLabel";
+            puanLabel.Size = new Size(132, 74);
+            puanLabel.TabIndex = 2;
+            puanLabel.Text = "Puan: 0";
+            puanLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // AnaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -103,5 +117,6 @@
         private Label sureLabel;
         private Label bilgiPanel;
         private Panel savasAlaniPanel;
+        private Label puanLabel;
     }
 }

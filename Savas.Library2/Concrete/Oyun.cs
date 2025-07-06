@@ -33,12 +33,14 @@ namespace Savas.Library.Concrete
         private readonly List<Mermi> _mermiler = new List<Mermi>();
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
         private Yildiz _yildiz;
+        private int _puan;
 
 
         #endregion
 
         #region olaylar
         public event EventHandler GecenSureDegisti;
+        public event EventHandler PuanDegisti;
         #endregion
 
         #region Özellikler
@@ -55,10 +57,23 @@ namespace Savas.Library.Concrete
                 GecenSureDegisti?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        public int Puan 
+        {  
+            get => _puan; 
+            private set 
+            {
+                _puan = value;
+
+                PuanDegisti?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+
         #endregion
 
         #region Methodlar
-       
+
         public Oyun(Panel savasAlaniPanel)
         {
             _savasAlaniPanel = savasAlaniPanel;
@@ -68,7 +83,7 @@ namespace Savas.Library.Concrete
             _UcakOlusturmaTimer.Tick += UcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
 
-
+            Puan = 0;
         }
 
         private void YildizOlusturma_Tick(object? sender, EventArgs e)
@@ -115,6 +130,7 @@ namespace Savas.Library.Concrete
                 if (vuranMermi is null) continue;
 
                 UcagiSil(ucak);
+                Puan += 5;
                 _mermiler.Remove(vuranMermi);
                
                 _savasAlaniPanel.Controls.Remove(vuranMermi);
@@ -124,8 +140,8 @@ namespace Savas.Library.Concrete
         private async void UcagiSil(Ucak ucak)
         {
             ucak.UcagiPatlat();
+            await Task.Delay(500);
             _ucaklar.Remove(ucak);
-            await Task.Delay(150);
             _savasAlaniPanel.Controls.Remove(ucak);
         }
 

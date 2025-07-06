@@ -20,6 +20,7 @@ internal class Ucak : Cisim
 
     public void UcagiPatlat()
     {
+        HareketMesafesi = (int)(Height * 0.10);
         Image = Image.FromFile($"images\\patlamisUcak.png");
     }
 

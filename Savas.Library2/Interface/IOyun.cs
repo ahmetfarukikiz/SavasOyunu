@@ -11,6 +11,7 @@ namespace Savas.Library.Interface
     {
 
         event EventHandler GecenSureDegisti;
+        event EventHandler PuanDegisti;
         bool DevamEdiyorMu { get; }
         TimeSpan GecenSure { get; }
         void Baslat();
