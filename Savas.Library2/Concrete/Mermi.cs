@@ -7,14 +7,14 @@ namespace Savas.Library2.Concrete
         private static readonly string[] mermiResimleri = { "mermi1", "mermi2", "mermi3" };
         private int mermiResmiIndexi = 0;
 
-        public Mermi(Size hareketAlaniBoyutlari, int namluOrtasiX) : base(hareketAlaniBoyutlari)
+        public Mermi(Size hareketAlaniBoyutlari, int namluOrtasiX, int namluOrtasiY) : base(hareketAlaniBoyutlari)
         {
-            BaslangicKonumunuAyarla(namluOrtasiX);
+            BaslangicKonumunuAyarla(namluOrtasiX, namluOrtasiY);
         }
 
-        private void BaslangicKonumunuAyarla(int namluOrtasiX)
+        private void BaslangicKonumunuAyarla(int namluOrtasiX, int namluOrtasiY)
         {
-            Bottom = HareketAlaniBoyutlari.Height;
+            Bottom = namluOrtasiY ;
             Center = namluOrtasiX;
             HareketMesafesi = (int)(Height * 1.5); 
         }

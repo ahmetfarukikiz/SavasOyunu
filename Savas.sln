@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Desktop", "Savas\Savas.Desktop.csproj", "{723FBFBD-109E-4499-8AD5-DF5689E7E5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Library2", "Savas.Library2\Savas.Library2.csproj", "{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Savas.Library", "Savas.Library2\Savas.Library.csproj", "{5B2B2FDC-C14B-4932-91E2-AA2E51DB08D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Savas.Library2\Savas.Library2.csproj" />
+    <ProjectReference Include="..\Savas.Library2\Savas.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>

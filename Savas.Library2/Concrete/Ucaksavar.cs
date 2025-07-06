@@ -1,7 +1,9 @@
 ﻿using Savas.Library2.Abstract;
+using Savas.Library2.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,13 +15,42 @@ namespace Savas.Library2.Concrete
         {   
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
-            HareketMesafesi = Width-60;
+            Bottom = hareketAlaniBoyutlari.Height;
+            HareketMesafesi = 12;
+            YatayHareketMesafesi = 14;
+            BackColor = Color.Transparent;
+      
         }
 
-        internal bool yakalandiMi(Yildiz yildiz)
+        internal bool yakalandiMi(Cisim cisim)
         {
-            var yakalandiMi = (yildiz.Left > Left && yildiz.Left < Right) || yildiz.Right < Right && yildiz.Right > Left;
+            if (cisim is null) return false;
+
+            var yakalandiMi = 
+               ((cisim.Left > Left && cisim.Left < Right) || (cisim.Right < Right && cisim.Right > Left))
+                &&
+                ((cisim.Bottom < Bottom && cisim.Bottom > Top) || (cisim.Top > Top && cisim.Top < Bottom));
             return yakalandiMi;
+        }
+
+        internal Ucak CarptiMi(List<Ucak> ucaklar)
+        {
+            bool yakalandiMi = false;
+
+            if (ucaklar is null) return null;
+
+            foreach (var ucak in ucaklar)
+            {
+                yakalandiMi =
+                ((ucak.Left > Left && ucak.Left < Right) || (ucak.Right < Right && ucak.Right > Left))
+                &&
+                    ((ucak.Bottom < Bottom && ucak.Bottom > Top) || (ucak.Top > Top && ucak.Top < Bottom));
+
+                if(yakalandiMi) return ucak;
+            }
+
+            return null;
+
         }
     }
 }

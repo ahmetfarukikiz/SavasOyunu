@@ -31,7 +31,6 @@
             panel1 = new Panel();
             sureLabel = new Label();
             bilgiPanel = new Label();
-            ucaksavarPanel = new Panel();
             savasAlaniPanel = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -70,22 +69,13 @@
             bilgiPanel.TabIndex = 0;
             bilgiPanel.Text = "Oyuna Başlamak için Enter Tuşuna basın \r\nHareket Etmek İçin: Yön tuşları veya \"A\" ve \"D\" tuşlarını kullanın\r\nAteş Etmek için boşluk (space) tuşunu kullanın\r\n\r\n\r\n\r\n\r\n";
             // 
-            // ucaksavarPanel
-            // 
-            ucaksavarPanel.BackColor = Color.SkyBlue;
-            ucaksavarPanel.Dock = DockStyle.Bottom;
-            ucaksavarPanel.Location = new Point(0, 812);
-            ucaksavarPanel.Name = "ucaksavarPanel";
-            ucaksavarPanel.Size = new Size(1488, 84);
-            ucaksavarPanel.TabIndex = 1;
-            // 
             // savasAlaniPanel
             // 
             savasAlaniPanel.BackColor = Color.SkyBlue;
             savasAlaniPanel.Dock = DockStyle.Fill;
             savasAlaniPanel.Location = new Point(0, 74);
             savasAlaniPanel.Name = "savasAlaniPanel";
-            savasAlaniPanel.Size = new Size(1488, 738);
+            savasAlaniPanel.Size = new Size(1488, 822);
             savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm
@@ -94,7 +84,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1488, 896);
             Controls.Add(savasAlaniPanel);
-            Controls.Add(ucaksavarPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -113,7 +102,6 @@
         private Panel panel1;
         private Label sureLabel;
         private Label bilgiPanel;
-        private Panel ucaksavarPanel;
         private Panel savasAlaniPanel;
     }
 }

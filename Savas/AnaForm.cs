@@ -12,7 +12,7 @@ namespace Savas
         public AnaForm()
         {
             InitializeComponent();
-            _oyun = new Oyun(ucaksavarPanel, savasAlaniPanel);
+            _oyun = new Oyun(savasAlaniPanel);
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
 
             // Timer ayarý
@@ -51,6 +51,17 @@ namespace Savas
             {
                 _oyun.UcaksavariHareketEttir(Yon.Sola);
             }
+
+            if (_basiliTuslar.Contains(Keys.Up) || _basiliTuslar.Contains(Keys.W))
+            {
+                _oyun.UcaksavariHareketEttir(Yon.Yukari);
+            }
+
+            if (_basiliTuslar.Contains(Keys.Down) || _basiliTuslar.Contains(Keys.S))
+            {
+                _oyun.UcaksavariHareketEttir(Yon.Asagi);
+            }
+
 
             if (_basiliTuslar.Contains(Keys.Space) ||_basiliTuslar.Contains(Keys.L))
             {

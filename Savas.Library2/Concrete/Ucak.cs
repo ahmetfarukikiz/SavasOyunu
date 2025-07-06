@@ -15,7 +15,12 @@ internal class Ucak : Cisim
     {
         
         Left = Random.Next(hareketAlaniBoyutlari.Width - Width + 1);
-        HareketMesafesi = (int)(Height * 0.2) + Random.Next(6);
+        HareketMesafesi = (int)(Height * 0.15) + Random.Next(10);
+    }
+
+    public void UcagiPatlat()
+    {
+        Image = Image.FromFile($"images\\patlamisUcak.png");
     }
 
     public Mermi? VurulduMu(List<Mermi> mermiler)

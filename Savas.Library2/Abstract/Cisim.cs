@@ -17,6 +17,9 @@ namespace Savas.Library2.Abstract
         public int HareketMesafesi { get; protected set; }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int YatayHareketMesafesi { get; protected set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new int Right { 
             get => base.Right;
             protected set => Left = value - Width; 
@@ -74,7 +77,7 @@ namespace Savas.Library2.Abstract
         {
             if (Left == 0) return true;
 
-            var yeniLeft = Left - HareketMesafesi;
+            var yeniLeft = Left - YatayHareketMesafesi;
             var tasacakMi = yeniLeft < 0;
 
             Left = tasacakMi ? 0 : yeniLeft; 
@@ -98,7 +101,7 @@ namespace Savas.Library2.Abstract
         {
             if (Right == HareketAlaniBoyutlari.Width) return true;
 
-            var yeniRight = HareketMesafesi + Right;
+            var yeniRight = YatayHareketMesafesi + Right;
             var tasacakMi = yeniRight > HareketAlaniBoyutlari.Width;
                 
             Right = tasacakMi ? HareketAlaniBoyutlari.Width : yeniRight;

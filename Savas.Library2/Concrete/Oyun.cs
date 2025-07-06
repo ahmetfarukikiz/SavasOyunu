@@ -18,16 +18,15 @@ namespace Savas.Library.Concrete
 
 
         #region Alanlar
-        private const int DEFATESGECİKMESİ = 400;
+        private const int DEFATESGECİKMESİ = 550;
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
-        private readonly Timer _hareketTimer = new Timer { Interval = 130 };
-        private readonly Timer _AnimasyonluResimTimer = new Timer { Interval = 60 };
+        private readonly Timer _yavasHareketTimer = new Timer { Interval = 150 };
+        private readonly Timer _HizliHareketTimer = new Timer { Interval = 60 };
         private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 1600 };
-        private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 30000 };
+        private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 26693 };
 
 
         private TimeSpan _gecenSure;
-        private readonly Panel _ucaksavarPanel;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
         private bool atesEdiliyor = false;
@@ -60,13 +59,12 @@ namespace Savas.Library.Concrete
 
         #region Methodlar
        
-        public Oyun(Panel ucaksavarPanel, Panel savasAlaniPanel)
+        public Oyun(Panel savasAlaniPanel)
         {
-            _ucaksavarPanel = ucaksavarPanel;
             _savasAlaniPanel = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
-            _hareketTimer.Tick += YavasHareketTimer_Tick;
-            _AnimasyonluResimTimer.Tick += HizliHareket_Tick;
+            _yavasHareketTimer.Tick += YavasHareketTimer_Tick;
+            _HizliHareketTimer.Tick += HizliHareket_Tick;
             _UcakOlusturmaTimer.Tick += UcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
 
@@ -87,6 +85,9 @@ namespace Savas.Library.Concrete
 
         private void HizliHareket_Tick(object? sender, EventArgs e)
         {
+            if (_ucaksavar.yakalandiMi(_yildiz)) { YildizEfekti(); YildiziSil(); }
+            if (_ucaksavar.CarptiMi(_ucaklar) is not null) UcagiSil(_ucaksavar.CarptiMi(_ucaklar));
+
             MermilerinResimleriniDegistir();
             MermileriHareketEttir();
             YildizlariHareketEttir();
@@ -103,6 +104,7 @@ namespace Savas.Library.Concrete
             VurulanUcaklariCikar();
         }
 
+
         private void VurulanUcaklariCikar()
         {
             for (var i = _ucaklar.Count - 1; i >= 0; i--)
@@ -112,11 +114,19 @@ namespace Savas.Library.Concrete
                 var vuranMermi = ucak.VurulduMu(_mermiler);
                 if (vuranMermi is null) continue;
 
-                _ucaklar.Remove(ucak);
+                UcagiSil(ucak);
                 _mermiler.Remove(vuranMermi);
-                _savasAlaniPanel.Controls.Remove(ucak);
+               
                 _savasAlaniPanel.Controls.Remove(vuranMermi);
             }
+        }
+
+        private async void UcagiSil(Ucak ucak)
+        {
+            ucak.UcagiPatlat();
+            _ucaklar.Remove(ucak);
+            await Task.Delay(150);
+            _savasAlaniPanel.Controls.Remove(ucak);
         }
 
         private void UcaklarihareketEttir()
@@ -159,7 +169,7 @@ namespace Savas.Library.Concrete
             if (!DevamEdiyorMu || atesEdiliyor) return;
 
             atesEdiliyor = true;
-            var mermi = new Mermi(_savasAlaniPanel.Size, _ucaksavar.Center);
+            var mermi = new Mermi(_savasAlaniPanel.Size, _ucaksavar.Center, _ucaksavar.Top);
             _mermiler.Add(mermi);
             _savasAlaniPanel.Controls.Add(mermi);
             await Task.Delay(AtesGecikmesi);
@@ -189,7 +199,6 @@ namespace Savas.Library.Concrete
             _ucaklar.Clear();
             _mermiler.Clear();
             _savasAlaniPanel.Controls.Clear();
-            _ucaksavarPanel.Controls.Clear();
             GecenSure = TimeSpan.Zero;
             AtesGecikmesi = DEFATESGECİKMESİ;
         }
@@ -209,8 +218,8 @@ namespace Savas.Library.Concrete
         {
             _UcakOlusturmaTimer.Start();
             _gecenSureTimer.Start();
-            _hareketTimer.Start();
-            _AnimasyonluResimTimer.Start();
+            _yavasHareketTimer.Start();
+            _HizliHareketTimer.Start();
             _YildizOlusturmaTimer.Start();
         }
 
@@ -220,8 +229,8 @@ namespace Savas.Library.Concrete
         {
             _UcakOlusturmaTimer.Stop();
             _gecenSureTimer.Stop();
-            _hareketTimer.Stop();
-            _AnimasyonluResimTimer.Stop();
+            _yavasHareketTimer.Stop();
+            _HizliHareketTimer.Stop();
             _YildizOlusturmaTimer.Stop();
         }
 
@@ -239,10 +248,14 @@ namespace Savas.Library.Concrete
 
             if(carptiMi)
             {
-                if (_ucaksavar.yakalandiMi(_yildiz)) YildizEfekti();
-                _savasAlaniPanel.Controls.Remove(_yildiz);
-                _yildiz = null;
+                YildiziSil();
             }
+        }
+
+        private void YildiziSil()
+        {
+            _savasAlaniPanel.Controls.Remove(_yildiz);
+            _yildiz = null;
         }
 
         private async void YildizEfekti()
@@ -257,9 +270,9 @@ namespace Savas.Library.Concrete
             if (!DevamEdiyorMu) return;
 
 
-            _ucaksavar = new Ucaksavar(_ucaksavarPanel.Width, _ucaksavarPanel.Size);
+            _ucaksavar = new Ucaksavar(_savasAlaniPanel.Width, _savasAlaniPanel.Size);
 
-            _ucaksavarPanel.Controls.Add(_ucaksavar);
+            _savasAlaniPanel.Controls.Add(_ucaksavar);
         }
 
         private void UcakOlustur()
