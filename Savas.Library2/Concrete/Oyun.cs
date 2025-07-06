@@ -168,7 +168,7 @@ namespace Savas.Library.Concrete
                var carptiMi = ucak.HareketEttir(Yon.Asagi);
                 if (!carptiMi) continue;
 
-                Bitir();
+                Bitir(); 
                 break;
             }
         }
@@ -233,6 +233,7 @@ namespace Savas.Library.Concrete
             _savasAlaniPanel.Controls.Clear();
             GecenSure = TimeSpan.Zero;
             AtesGecikmesi = DEFATESGECİKMESİ;
+            Puan = 0;
         }
 
         private void Bitir()

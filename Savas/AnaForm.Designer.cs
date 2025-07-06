@@ -45,7 +45,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1488, 74);
+            panel1.Size = new Size(1507, 62);
             panel1.TabIndex = 0;
             // 
             // puanLabel
@@ -53,9 +53,9 @@
             puanLabel.Dock = DockStyle.Right;
             puanLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
             puanLabel.ForeColor = SystemColors.ButtonFace;
-            puanLabel.Location = new Point(1257, 0);
+            puanLabel.Location = new Point(1276, 0);
             puanLabel.Name = "puanLabel";
-            puanLabel.Size = new Size(132, 74);
+            puanLabel.Size = new Size(132, 62);
             puanLabel.TabIndex = 2;
             puanLabel.Text = "Puan: 0";
             puanLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -65,9 +65,9 @@
             sureLabel.Dock = DockStyle.Right;
             sureLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
             sureLabel.ForeColor = SystemColors.ButtonFace;
-            sureLabel.Location = new Point(1389, 0);
+            sureLabel.Location = new Point(1408, 0);
             sureLabel.Name = "sureLabel";
-            sureLabel.Size = new Size(99, 74);
+            sureLabel.Size = new Size(99, 62);
             sureLabel.TabIndex = 1;
             sureLabel.Text = "0:00";
             sureLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -87,16 +87,16 @@
             // 
             savasAlaniPanel.BackColor = Color.SkyBlue;
             savasAlaniPanel.Dock = DockStyle.Fill;
-            savasAlaniPanel.Location = new Point(0, 74);
+            savasAlaniPanel.Location = new Point(0, 62);
             savasAlaniPanel.Name = "savasAlaniPanel";
-            savasAlaniPanel.Size = new Size(1488, 822);
+            savasAlaniPanel.Size = new Size(1507, 834);
             savasAlaniPanel.TabIndex = 2;
             // 
             // AnaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1488, 896);
+            ClientSize = new Size(1507, 896);
             Controls.Add(savasAlaniPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -105,6 +105,7 @@
             StartPosition = FormStartPosition.Manual;
             Text = "Savaş Oyunu";
             WindowState = FormWindowState.Maximized;
+            Load += AnaForm_Load;
             KeyDown += AnaForm_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

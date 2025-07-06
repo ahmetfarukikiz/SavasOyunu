@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,9 @@ internal class Ucak : Cisim
     {
         foreach(var mermi in mermiler)
         {
-            var vurulduMu = mermi.Top < Bottom && mermi.Right > Left && mermi.Left < Right;
+            var vurulduMu = ((mermi.Left > Left && mermi.Left < Right) || (mermi.Right < Right && mermi.Right > Left))
+            &&
+            ((mermi.Bottom < Bottom && mermi.Bottom > Top) || (mermi.Top > Top && mermi.Top < Bottom));
             if (vurulduMu) return mermi;
         }
        

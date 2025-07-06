@@ -26,8 +26,8 @@ namespace Savas
             this.KeyPreview = true;
             this.KeyDown += AnaForm_KeyDown;
             this.KeyUp += AnaForm_KeyUp;
-       
-            
+
+
         }
 
         private void Oyun_OyunBitti(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Savas
             }
 
 
-            if (_basiliTuslar.Contains(Keys.Space) ||_basiliTuslar.Contains(Keys.L))
+            if (_basiliTuslar.Contains(Keys.Space) || _basiliTuslar.Contains(Keys.L))
             {
                 _oyun.AtesEt();
             }
@@ -92,6 +92,9 @@ namespace Savas
             puanLabel.Text = $"Puan: {_oyun.Puan}";
         }
 
+        private void AnaForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
