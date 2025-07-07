@@ -11,8 +11,8 @@ namespace Savas.Library.Concrete
         public KucukUcak(Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
         {
             Puan = 5;
-            Can = 1;
-            HareketMesafesi = (int)(Height * 0.15) + Random.Next(10);
+            can = 1;
+            HareketMesafesi = (int)(Height * 0.12) + Random.Next(7);
 
         }
 

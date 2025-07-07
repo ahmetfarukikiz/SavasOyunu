@@ -33,12 +33,14 @@
             sureLabel = new Label();
             bilgiPanel = new Label();
             savasAlaniPanel = new Panel();
+            canLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
+            panel1.Controls.Add(canLabel);
             panel1.Controls.Add(puanLabel);
             panel1.Controls.Add(sureLabel);
             panel1.Controls.Add(bilgiPanel);
@@ -92,6 +94,18 @@
             savasAlaniPanel.Size = new Size(1507, 834);
             savasAlaniPanel.TabIndex = 2;
             // 
+            // canLabel
+            // 
+            canLabel.Dock = DockStyle.Right;
+            canLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
+            canLabel.ForeColor = Color.Maroon;
+            canLabel.Location = new Point(1144, 0);
+            canLabel.Name = "canLabel";
+            canLabel.Size = new Size(132, 62);
+            canLabel.TabIndex = 3;
+            canLabel.Text = "Can : 100";
+            canLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // AnaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -119,5 +133,6 @@
         private Label bilgiPanel;
         private Panel savasAlaniPanel;
         private Label puanLabel;
+        private Label canLabel;
     }
 }

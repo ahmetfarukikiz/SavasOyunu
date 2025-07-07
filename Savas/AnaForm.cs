@@ -1,5 +1,6 @@
 using Savas.Library.Concrete;
 using Savas.Library.Enum;
+using Savas.Library.myEventArgs;
 using Timer = System.Windows.Forms.Timer;
 
 namespace Savas
@@ -16,6 +17,7 @@ namespace Savas
             _oyun.PuanDegisti += Oyun_PuanDegisti;
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
             _oyun.OyunBitti += Oyun_OyunBitti;
+            _oyun.CanDegisti += Oyun_CanDegisti;
 
             // Timer ayarý
             _kontrolTimer.Interval = 20; // 50 FPS gibi
@@ -28,6 +30,11 @@ namespace Savas
             this.KeyUp += AnaForm_KeyUp;
 
 
+        }
+
+        private void Oyun_CanDegisti(object? sender, CanEventArgs e)
+        {
+            canLabel.Text = $"Can : {e.Can}";
         }
 
         private void Oyun_OyunBitti(object sender, EventArgs e)
@@ -91,6 +98,8 @@ namespace Savas
         {
             puanLabel.Text = $"Puan: {_oyun.Puan}";
         }
+
+
 
         private void AnaForm_Load(object sender, EventArgs e)
         {

@@ -7,13 +7,44 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using Savas.Library.myEventArgs;
 
 namespace Savas.Library2.Concrete
 {
     internal class Ucaksavar : Cisim
     {
+
+        public delegate void CanEventHandler(object sender, CanEventArgs e);
+
+        public event CanEventHandler CanDegisti;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int MermiHasari { get; private set; }
+       
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int Can 
+        { 
+            get => field;
+            set
+            {
+                // Negatifse sıfırla
+                if (value < 0) value = 0;
+
+                // Aynıysa boşuna event tetikleme
+                if (field == value) return;
+
+                field = value;
+
+                var e = new CanEventArgs { Can = field };
+                CanDegisti?.Invoke(this, e);
+            }
+        }
         public Ucaksavar(int panelGenisligi, Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
-        {   
+        {
+            MermiHasari = 1;
+       
+            Can = 100;
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
             Bottom = hareketAlaniBoyutlari.Height;

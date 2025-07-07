@@ -10,7 +10,7 @@ namespace Savas.Library.Concrete
         public BuyukUcak(Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
         {
             Puan = 15;
-            Can = 3;
+            can = 3;
             HareketMesafesi = (int)(Height * 0.07) + Random.Next(-2,2);
         }
 

@@ -3,20 +3,22 @@ using Savas.Library.Enum;
 using Timer = System.Windows.Forms.Timer;
 using Savas.Library2.Concrete;
 using Savas.Library.Abstract;
+using Savas.Library.myEventArgs;
+using System.Threading.Tasks;
 
 
 namespace Savas.Library.Concrete
 {
-   
+
 
     public class Oyun : IOyun
-    {
-
+    {   
+        public delegate void CanEventHandler(object sender, CanEventArgs e);
 
         #region Alanlar
         private const int DEFATESGECİKMESİ = 550;
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
-        private readonly Timer _yavasHareketTimer = new Timer { Interval = 150 };
+        private readonly Timer _yavasHareketTimer = new Timer { Interval = 200 };
         private readonly Timer _HizliHareketTimer = new Timer { Interval = 60 };
         private readonly Timer _KucukUcakOlusturmaTimer = new Timer { Interval = 2000 };
         private readonly Timer _BuyukUcakOlusturmaTimer = new Timer { Interval = 15000 };
@@ -32,6 +34,7 @@ namespace Savas.Library.Concrete
         private Yildiz _yildiz;
         private int _puan;
         private bool yeniCarpisildi;
+        private bool yeniGecti;
 
 
         #endregion
@@ -39,6 +42,7 @@ namespace Savas.Library.Concrete
         #region olaylar
         public event EventHandler GecenSureDegisti;
         public event EventHandler PuanDegisti;
+        public event CanEventHandler CanDegisti;
         public event EventHandler OyunBitti;
         #endregion
 
@@ -84,14 +88,22 @@ namespace Savas.Library.Concrete
             _KucukUcakOlusturmaTimer.Tick += KucukUcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
             _BuyukUcakOlusturmaTimer.Tick += BuyukUcakOlusturma_Tick;
-            PuanDegisti += PuanDegitiginde; 
+            PuanDegisti += PuanDegistiginde;
+
+
 
             Puan = 0;
         }
 
-        private void PuanDegitiginde(object? sender, EventArgs e)
+        private void ucaksavar_CanDegisti(object? sender, CanEventArgs e)
         {
-            if (Puan == 60) _BuyukUcakOlusturmaTimer.Start(); 
+            CanDegisti?.Invoke(this, e);
+        }
+
+        private void PuanDegistiginde(object? sender, EventArgs e)
+        {
+            if (Puan == 60) _BuyukUcakOlusturmaTimer.Start();
+            if (Puan % 10 == 0 && _yavasHareketTimer.Interval > 50) _yavasHareketTimer.Interval -= 1;
         }
 
         private void BuyukUcakOlusturma_Tick(object? sender, EventArgs e)
@@ -129,19 +141,17 @@ namespace Savas.Library.Concrete
 
             var ucak = _ucaksavar.CarptiMi(_ucaklar);
 
-
-            ucak.VurulmaSayisi++;
-          
- 
-
-            
+            ucak.can -= _ucaksavar.MermiHasari;
             Puan -= 5;
+
             await Task.Delay(400);
             yeniCarpisildi = false;
 
-            if (ucak.VurulmaSayisi < ucak.Can) return;
+            if (ucak.can > 0) return;
 
+            ucak.UcagiPatlat();
           UcagiSil(ucak);
+
 
         }
 
@@ -166,13 +176,14 @@ namespace Savas.Library.Concrete
                 var vuranMermi = ucak.VurulduMu(_mermiler);
                 if (vuranMermi is null) continue;
 
-                ucak.VurulmaSayisi++;
+                ucak.can -= _ucaksavar.MermiHasari;
                 _mermiler.Remove(vuranMermi);
                 _savasAlaniPanel.Controls.Remove(vuranMermi);
 
-                if (ucak.VurulmaSayisi < ucak.Can) continue;
+                if (ucak.can > 0) continue;
 
                 Puan += ucak.Puan;
+                ucak.UcagiPatlat();
                 UcagiSil(ucak);
                 
               
@@ -183,19 +194,26 @@ namespace Savas.Library.Concrete
 
         private async void UcagiSil(Ucak ucak)
         {
-            ucak.UcagiPatlat();
             await Task.Delay(400);
             _ucaklar.Remove(ucak);
             _savasAlaniPanel.Controls.Remove(ucak);
         }
 
-        private void UcaklarihareketEttir()
+        private async Task UcaklarihareketEttir()
         {
             foreach(var ucak in _ucaklar)
             {
                var carptiMi = ucak.HareketEttir(Yon.Asagi);
                 if (!carptiMi) continue;
 
+                if (yeniGecti == true) continue;
+                yeniGecti = true;
+                UcagiSil(ucak);
+                await Task.Delay(400);
+                _ucaksavar.Can -= 25;
+                yeniGecti = false;
+                if (_ucaksavar.Can != 0) continue;
+      
                 Bitir(); 
                 break;
             }
@@ -240,6 +258,8 @@ namespace Savas.Library.Concrete
         {
             if (DevamEdiyorMu) return;
 
+
+
             Sifirla();
 
             DevamEdiyorMu = true;
@@ -248,10 +268,8 @@ namespace Savas.Library.Concrete
 
             UcaksavarOlustur();
 
-         
 
-
-
+           
         }
 
         private void Sifirla()
@@ -262,6 +280,12 @@ namespace Savas.Library.Concrete
             GecenSure = TimeSpan.Zero;
             AtesGecikmesi = DEFATESGECİKMESİ;
             Puan = 0;
+            UcaksavarOlustur();
+
+
+
+
+
         }
 
         private void Bitir()
@@ -331,9 +355,10 @@ namespace Savas.Library.Concrete
         {
             if (!DevamEdiyorMu) return;
 
-
             _ucaksavar = new Ucaksavar(_savasAlaniPanel.Width, _savasAlaniPanel.Size);
-
+            _ucaksavar.CanDegisti += ucaksavar_CanDegisti;
+            _ucaksavar.Can = 0;
+            _ucaksavar.Can += 100;
             _savasAlaniPanel.Controls.Add(_ucaksavar);
         }
 

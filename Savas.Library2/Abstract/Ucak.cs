@@ -8,11 +8,9 @@ namespace Savas.Library.Abstract;
 internal abstract class Ucak : Cisim
 {
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public int VurulmaSayisi;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public int Can { get; protected set; }
+    public int can;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public int Puan { get; protected set; }
@@ -20,7 +18,6 @@ internal abstract class Ucak : Cisim
     private static readonly Random Random = new Random();
     public Ucak(Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
     {
-        VurulmaSayisi = 0;
         Left = Random.Next(hareketAlaniBoyutlari.Width - Width + 1);
 
     }
