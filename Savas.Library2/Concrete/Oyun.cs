@@ -7,6 +7,7 @@ using Timer = System.Windows.Forms.Timer;
 using System.Runtime.Versioning;
 using System.Resources;
 using Savas.Library2.Concrete;
+using Savas.Library.Abstract;
 
 
 namespace Savas.Library.Concrete
@@ -22,7 +23,8 @@ namespace Savas.Library.Concrete
         private readonly Timer _gecenSureTimer = new Timer { Interval = 1000 };
         private readonly Timer _yavasHareketTimer = new Timer { Interval = 150 };
         private readonly Timer _HizliHareketTimer = new Timer { Interval = 60 };
-        private readonly Timer _UcakOlusturmaTimer = new Timer { Interval = 1600 };
+        private readonly Timer _KucukUcakOlusturmaTimer = new Timer { Interval = 2000 };
+        private readonly Timer _BuyukUcakOlusturmaTimer = new Timer { Interval = 15000 };
         private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 26693 };
 
 
@@ -84,10 +86,22 @@ namespace Savas.Library.Concrete
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _yavasHareketTimer.Tick += YavasHareketTimer_Tick;
             _HizliHareketTimer.Tick += HizliHareket_Tick;
-            _UcakOlusturmaTimer.Tick += UcakOlusturma_Tick;
+            _KucukUcakOlusturmaTimer.Tick += KucukUcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
+            _BuyukUcakOlusturmaTimer.Tick += BuyukUcakOlusturma_Tick;
+            PuanDegisti += PuanDegitiginde;
 
             Puan = 0;
+        }
+
+        private void PuanDegitiginde(object? sender, EventArgs e)
+        {
+            if (Puan == 60) _BuyukUcakOlusturmaTimer.Start();
+        }
+
+        private void BuyukUcakOlusturma_Tick(object? sender, EventArgs e)
+        {
+            BuyukUcakOlustur();
         }
 
         private void YildizOlusturma_Tick(object? sender, EventArgs e)
@@ -97,9 +111,9 @@ namespace Savas.Library.Concrete
 
         
 
-        private void UcakOlusturma_Tick(object? sender, EventArgs e)
+        private void KucukUcakOlusturma_Tick(object? sender, EventArgs e)
         {
-            UcakOlustur();
+            KucukUcakOlustur();
         }
 
         private void HizliHareket_Tick(object? sender, EventArgs e)
@@ -145,11 +159,18 @@ namespace Savas.Library.Concrete
                 var vuranMermi = ucak.VurulduMu(_mermiler);
                 if (vuranMermi is null) continue;
 
-                UcagiSil(ucak);
-                Puan += 5;
+                ucak.VurulmaSayisi++;
                 _mermiler.Remove(vuranMermi);
-               
                 _savasAlaniPanel.Controls.Remove(vuranMermi);
+
+                if (ucak.VurulmaSayisi < ucak.Can) continue;
+
+                Puan += ucak.Puan;
+                UcagiSil(ucak);
+                
+              
+               
+            
             }
         }
 
@@ -250,7 +271,7 @@ namespace Savas.Library.Concrete
 
         public void ZamanliyicilariBaslat()
         {
-            _UcakOlusturmaTimer.Start();
+            _KucukUcakOlusturmaTimer.Start();
             _gecenSureTimer.Start();
             _yavasHareketTimer.Start();
             _HizliHareketTimer.Start();
@@ -261,11 +282,12 @@ namespace Savas.Library.Concrete
 
         public void ZamanliyicilariDurdur()
         {
-            _UcakOlusturmaTimer.Stop();
+            _KucukUcakOlusturmaTimer.Stop();
             _gecenSureTimer.Stop();
             _yavasHareketTimer.Stop();
             _HizliHareketTimer.Stop();
             _YildizOlusturmaTimer.Stop();
+            _BuyukUcakOlusturmaTimer.Stop();
         }
 
         private void YildizOlustur()
@@ -308,12 +330,19 @@ namespace Savas.Library.Concrete
             _savasAlaniPanel.Controls.Add(_ucaksavar);
         }
 
-        private void UcakOlustur()
+        private void KucukUcakOlustur()
         {
-            var ucak = new Ucak(_savasAlaniPanel.Size);
+            var ucak = new KucukUcak(_savasAlaniPanel.Size);
             _ucaklar.Add(ucak);
             _savasAlaniPanel.Controls.Add(ucak);
         }
+        private void BuyukUcakOlustur()
+        {
+            var ucak = new BuyukUcak(_savasAlaniPanel.Size);
+            _ucaklar.Add(ucak);
+            _savasAlaniPanel.Controls.Add(ucak);
+        }
+
 
 
         public void UcaksavariHareketEttir(Yon yon)
