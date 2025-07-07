@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Savas.Library.Helpers;
 
 namespace Savas.Library.Abstract;
 
@@ -33,7 +34,7 @@ internal abstract class Ucak : Cisim
     public virtual void UcagiPatlat()
     {
         HareketMesafesi = (int)(Height * 0.10);
-        Image = Image.FromFile($"images\\patlamisUcak.png");
+        Image = ResimYukleyici.GorselGetir($@"patlamisUcak.png");
     }
 
     public Mermi? VurulduMu(List<Mermi> mermiler)

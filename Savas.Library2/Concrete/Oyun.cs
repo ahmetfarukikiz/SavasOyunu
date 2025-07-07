@@ -89,14 +89,14 @@ namespace Savas.Library.Concrete
             _KucukUcakOlusturmaTimer.Tick += KucukUcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
             _BuyukUcakOlusturmaTimer.Tick += BuyukUcakOlusturma_Tick;
-            PuanDegisti += PuanDegitiginde;
+            PuanDegisti += PuanDegitiginde; 
 
             Puan = 0;
         }
 
         private void PuanDegitiginde(object? sender, EventArgs e)
         {
-            if (Puan == 60) _BuyukUcakOlusturmaTimer.Start();
+            if (Puan == 60) _BuyukUcakOlusturmaTimer.Start(); 
         }
 
         private void BuyukUcakOlusturma_Tick(object? sender, EventArgs e)
@@ -130,12 +130,24 @@ namespace Savas.Library.Concrete
         {
             if (yeniCarpisildi == true) return;
             yeniCarpisildi = true;
-            _ucaksavar.UcakSavarCarpti(); 
-            UcagiSil(_ucaksavar.CarptiMi(_ucaklar));
+            _ucaksavar.UcakSavarCarpti();
+
+            var ucak = _ucaksavar.CarptiMi(_ucaklar);
+
+
+            ucak.VurulmaSayisi++;
+          
+ 
+
+            
             Puan -= 5;
             await Task.Delay(400);
             yeniCarpisildi = false;
-           
+
+            if (ucak.VurulmaSayisi < ucak.Can) return;
+
+          UcagiSil(ucak);
+
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)

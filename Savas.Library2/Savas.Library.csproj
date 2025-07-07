@@ -9,6 +9,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resimler\BuyukUcak.png" />
+    <None Remove="Resimler\KucukUcak.png" />
+    <None Remove="Resimler\mermi.png" />
+    <None Remove="Resimler\mermi1.png" />
+    <None Remove="Resimler\mermi2.png" />
+    <None Remove="Resimler\mermi3.png" />
+    <None Remove="Resimler\patlamisBuyukUcak.png" />
+    <None Remove="Resimler\patlamisKucukUcak.png" />
+    <None Remove="Resimler\space.png" />
+    <None Remove="Resimler\Ucaksavar.png" />
+    <None Remove="Resimler\Yildiz.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resimler\BuyukUcak.png" />
+    <EmbeddedResource Include="Resimler\KucukUcak.png" />
+    <EmbeddedResource Include="Resimler\Mermi.png" />
+    <EmbeddedResource Include="Resimler\Mermi1.png" />
+    <EmbeddedResource Include="Resimler\Mermi2.png" />
+    <EmbeddedResource Include="Resimler\Mermi3.png" />
+    <EmbeddedResource Include="Resimler\patlamisBuyukUcak.png" />
+    <EmbeddedResource Include="Resimler\patlamisKucukUcak.png" />
+    <EmbeddedResource Include="Resimler\space.png" />
+    <EmbeddedResource Include="Resimler\Ucaksavar.png" />
+    <EmbeddedResource Include="Resimler\Yildiz.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -1,4 +1,5 @@
 ﻿using Savas.Library.Abstract;
+using Savas.Library.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Savas.Library.Concrete
         public override void UcagiPatlat()
         {
             HareketMesafesi = (int)(Height * 0.10);
-            Image = Image.FromFile($"images\\patlamisKucukUcak.png");
+            Image = ResimYukleyici.GorselGetir($@"patlamisKucukUcak.png");
         }
     }
 }

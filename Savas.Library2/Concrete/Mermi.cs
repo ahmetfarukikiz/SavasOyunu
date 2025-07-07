@@ -1,10 +1,11 @@
-﻿using Savas.Library2.Abstract;
+﻿using Savas.Library.Helpers;
+using Savas.Library2.Abstract;
 
 namespace Savas.Library2.Concrete
 {
     class Mermi : Cisim
     {
-        private static readonly string[] mermiResimleri = { "mermi1", "mermi2", "mermi3" };
+        private static readonly string[] mermiResimleri = { "Mermi1", "Mermi2", "Mermi3" };
         private int mermiResmiIndexi = 0;
 
         public Mermi(Size hareketAlaniBoyutlari, int namluOrtasiX, int namluOrtasiY) : base(hareketAlaniBoyutlari)
@@ -21,7 +22,7 @@ namespace Savas.Library2.Concrete
 
         public void AnimasyonluResimAyarla()
         {
-            Image = Image.FromFile($@"images\{mermiResimleri[mermiResmiIndexi]}.png");
+            Image = ResimYukleyici.GorselGetir($@"{mermiResimleri[mermiResmiIndexi]}.png");
             if (mermiResmiIndexi < 2) mermiResmiIndexi++;
             if (mermiResmiIndexi == 2) mermiResmiIndexi = 0;
         }

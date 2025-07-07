@@ -1,4 +1,5 @@
 ﻿using Savas.Library.Abstract;
+using Savas.Library.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,17 @@ namespace Savas.Library.Concrete
         {
             Puan = 15;
             Can = 3;
-            HareketMesafesi = (int)(Height * 0.03) + Random.Next(-2,2);
+            HareketMesafesi = (int)(Height * 0.07) + Random.Next(-2,2);
         }
 
-        public override void UcagiPatlat()
+        public async override void UcagiPatlat()
         {
-            HareketMesafesi = (int)(Height * 0.10);
-            Image = Image.FromFile($"images\\patlamisBuyukUcak.png");
+            var eskiHareketMesafesi = HareketMesafesi;
+            HareketMesafesi = (int)(HareketMesafesi * 0.3);
+            Image = ResimYukleyici.GorselGetir($@"patlamisBuyukUcak.png");
+            await Task.Delay(400);
+            Image = ResimYukleyici.GorselGetir($@"BuyukUcak.png");
+            HareketMesafesi = eskiHareketMesafesi;
         }
     }
 }

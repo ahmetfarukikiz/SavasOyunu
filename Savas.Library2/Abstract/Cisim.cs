@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Savas.Library.Helpers;
 
 namespace Savas.Library2.Abstract
 {
@@ -46,7 +47,7 @@ namespace Savas.Library2.Abstract
 
         protected Cisim(Size hareketAlaniBoyutlari)
         {
-            Image = Image.FromFile($@"images\{GetType().Name}.png");
+            Image = ResimYukleyici.GorselGetir($@"{GetType().Name}.png");
 
             SizeMode = PictureBoxSizeMode.AutoSize;
             HareketAlaniBoyutlari = hareketAlaniBoyutlari;
