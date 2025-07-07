@@ -1,11 +1,6 @@
-﻿using System;
-using Savas.Library.Interface;
+﻿using Savas.Library.Interface;
 using Savas.Library.Enum;
-using System.Windows.Forms;
-using System.Drawing;
 using Timer = System.Windows.Forms.Timer;
-using System.Runtime.Versioning;
-using System.Resources;
 using Savas.Library2.Concrete;
 using Savas.Library.Abstract;
 

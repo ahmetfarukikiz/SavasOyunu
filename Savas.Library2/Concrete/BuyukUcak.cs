@@ -1,10 +1,6 @@
 ﻿using Savas.Library.Abstract;
 using Savas.Library.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Savas.Library.Concrete
 {
