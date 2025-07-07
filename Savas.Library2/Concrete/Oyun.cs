@@ -25,6 +25,7 @@ namespace Savas.Library.Concrete
         private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 26693 };
 
 
+        Random kalpSansi = new Random();
         private TimeSpan _gecenSure;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
@@ -35,6 +36,7 @@ namespace Savas.Library.Concrete
         private int _puan;
         private bool yeniCarpisildi;
         private bool yeniGecti;
+        private Kalp _kalp;
 
 
         #endregion
@@ -98,6 +100,7 @@ namespace Savas.Library.Concrete
         private void ucaksavar_CanDegisti(object? sender, CanEventArgs e)
         {
             CanDegisti?.Invoke(this, e);
+            if(_ucaksavar.Can <= 0) Bitir();
         }
 
         private void PuanDegistiginde(object? sender, EventArgs e)
@@ -126,31 +129,39 @@ namespace Savas.Library.Concrete
         private void HizliHareket_Tick(object? sender, EventArgs e)
         {
             if (_ucaksavar.yakalandiMi(_yildiz)) { YildizEfekti(); YildiziSil(); }
+            if (_ucaksavar.yakalandiMi(_kalp)) { KalpEfekti(); KalbiSil(); }
             if (_ucaksavar.CarptiMi(_ucaklar) is not null) UcaksavarUcaklaCarpisti();
 
             MermilerinResimleriniDegistir();
             MermileriHareketEttir();
             YildizlariHareketEttir();
+            KalpleriHareketEttir();
         }
 
         private async void UcaksavarUcaklaCarpisti()
         {
             if (yeniCarpisildi == true) return;
             yeniCarpisildi = true;
+
+            
             _ucaksavar.UcakSavarCarpti();
 
             var ucak = _ucaksavar.CarptiMi(_ucaklar);
 
             ucak.can -= _ucaksavar.MermiHasari;
-            Puan -= 5;
 
-            await Task.Delay(400);
-            yeniCarpisildi = false;
+            Puan -= 5;
+            _ucaksavar.Can -= 10;
 
             if (ucak.can > 0) return;
 
             ucak.UcagiPatlat();
-          UcagiSil(ucak);
+            UcagiSil(ucak);
+
+            await Task.Delay(400);
+            yeniCarpisildi = false;
+
+            
 
 
         }
@@ -195,8 +206,39 @@ namespace Savas.Library.Concrete
         private async void UcagiSil(Ucak ucak)
         {
             await Task.Delay(400);
+            if (kalpSansi.Next(0, 11) == 5) KalpOlustur(ucak.Center, ucak.Middle);
             _ucaklar.Remove(ucak);
             _savasAlaniPanel.Controls.Remove(ucak);
+
+            
+        }
+
+        private void KalpOlustur(int center, int middle)
+        {
+            _kalp = new Kalp(_savasAlaniPanel.Size, center, middle);
+            _savasAlaniPanel.Controls.Add(_kalp);
+        }
+
+        private void KalpleriHareketEttir()
+        {
+            if (_kalp is null) return;
+            var carptiMi = _kalp.HareketEttir(Yon.Asagi);
+
+            if (carptiMi)
+            {
+                KalbiSil();
+            }
+        }
+
+        private void KalbiSil()
+        {
+            _savasAlaniPanel.Controls.Remove(_kalp);
+            _kalp = null;
+        }
+
+        private void KalpEfekti()
+        {
+            _ucaksavar.Can += 20;
         }
 
         private async Task UcaklarihareketEttir()
@@ -214,7 +256,7 @@ namespace Savas.Library.Concrete
                 yeniGecti = false;
                 if (_ucaksavar.Can != 0) continue;
       
-                Bitir(); 
+      
                 break;
             }
         }
@@ -357,8 +399,8 @@ namespace Savas.Library.Concrete
 
             _ucaksavar = new Ucaksavar(_savasAlaniPanel.Width, _savasAlaniPanel.Size);
             _ucaksavar.CanDegisti += ucaksavar_CanDegisti;
-            _ucaksavar.Can = 0;
-            _ucaksavar.Can += 100;
+            _ucaksavar.Can = 1;
+            _ucaksavar.Can += 99;
             _savasAlaniPanel.Controls.Add(_ucaksavar);
         }
 

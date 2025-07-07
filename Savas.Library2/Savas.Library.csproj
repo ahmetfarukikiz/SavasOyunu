@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Resimler\BuyukUcak.png" />
+    <None Remove="Resimler\Kalp.png" />
     <None Remove="Resimler\KucukUcak.png" />
     <None Remove="Resimler\mermi.png" />
     <None Remove="Resimler\mermi1.png" />
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resimler\BuyukUcak.png" />
+    <EmbeddedResource Include="Resimler\Kalp.png" />
     <EmbeddedResource Include="Resimler\KucukUcak.png" />
     <EmbeddedResource Include="Resimler\Mermi.png" />
     <EmbeddedResource Include="Resimler\Mermi1.png" />

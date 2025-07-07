@@ -28,15 +28,15 @@ namespace Savas.Library2.Concrete
             get => field;
             set
             {
-                // Negatifse sıfırla
-                if (value < 0) value = 0;
 
-                // Aynıysa boşuna event tetikleme
-                if (field == value) return;
-
+                if (Can < 0) field = 0;
+                else if( Can > 100) field = 100;
                 field = value;
+                if (Can < 0) field = 0;
+                else if (Can > 100) field = 100;
 
-                var e = new CanEventArgs { Can = field };
+                var e = new CanEventArgs();
+                e.Can = Can;
                 CanDegisti?.Invoke(this, e);
             }
         }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            canLabel = new Label();
             puanLabel = new Label();
             sureLabel = new Label();
             bilgiPanel = new Label();
             savasAlaniPanel = new Panel();
-            canLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,17 +50,29 @@
             panel1.Size = new Size(1507, 62);
             panel1.TabIndex = 0;
             // 
+            // canLabel
+            // 
+            canLabel.Dock = DockStyle.Right;
+            canLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
+            canLabel.ForeColor = Color.Maroon;
+            canLabel.Location = new Point(1124, 0);
+            canLabel.Name = "canLabel";
+            canLabel.Size = new Size(132, 62);
+            canLabel.TabIndex = 3;
+            canLabel.Text = "Can : 0";
+            canLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // puanLabel
             // 
             puanLabel.Dock = DockStyle.Right;
             puanLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
             puanLabel.ForeColor = SystemColors.ButtonFace;
-            puanLabel.Location = new Point(1276, 0);
+            puanLabel.Location = new Point(1256, 0);
             puanLabel.Name = "puanLabel";
-            puanLabel.Size = new Size(132, 62);
+            puanLabel.Size = new Size(152, 62);
             puanLabel.TabIndex = 2;
             puanLabel.Text = "Puan: 0";
-            puanLabel.TextAlign = ContentAlignment.MiddleRight;
+            puanLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // sureLabel
             // 
@@ -72,7 +84,7 @@
             sureLabel.Size = new Size(99, 62);
             sureLabel.TabIndex = 1;
             sureLabel.Text = "0:00";
-            sureLabel.TextAlign = ContentAlignment.MiddleRight;
+            sureLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // bilgiPanel
             // 
@@ -93,18 +105,6 @@
             savasAlaniPanel.Name = "savasAlaniPanel";
             savasAlaniPanel.Size = new Size(1507, 834);
             savasAlaniPanel.TabIndex = 2;
-            // 
-            // canLabel
-            // 
-            canLabel.Dock = DockStyle.Right;
-            canLabel.Font = new Font("Rockwell", 15F, FontStyle.Bold);
-            canLabel.ForeColor = Color.Maroon;
-            canLabel.Location = new Point(1144, 0);
-            canLabel.Name = "canLabel";
-            canLabel.Size = new Size(132, 62);
-            canLabel.TabIndex = 3;
-            canLabel.Text = "Can : 100";
-            canLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // AnaForm
             // 
