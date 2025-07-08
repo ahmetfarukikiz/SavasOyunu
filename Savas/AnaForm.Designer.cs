@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnaForm));
             panel1 = new Panel();
             canLabel = new Label();
             puanLabel = new Label();
@@ -114,6 +115,7 @@
             Controls.Add(savasAlaniPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "AnaForm";
             StartPosition = FormStartPosition.Manual;

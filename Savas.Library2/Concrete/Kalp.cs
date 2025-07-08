@@ -13,7 +13,7 @@ namespace Savas.Library.Concrete
         public Kalp(Size hareketAlaniBoyutlari, int center, int middle) : base(hareketAlaniBoyutlari)
         {
             BaslangicKonumunuAyarla(center, middle);
-            HareketMesafesi = (int)(Height * 0.05);
+            HareketMesafesi = (int)(Height * 0.10);
         }
 
         private void BaslangicKonumunuAyarla(int center, int middle)

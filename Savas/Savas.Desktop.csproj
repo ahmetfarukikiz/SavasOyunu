@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Ucaksavar.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Ucaksavar.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Savas.Library2\Savas.Library.csproj" />
