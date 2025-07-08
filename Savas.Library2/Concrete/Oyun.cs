@@ -36,7 +36,7 @@ namespace Savas.Library.Concrete
         private int _puan;
         private bool yeniCarpisildi;
         private bool yeniGecti;
-        private Kalp _kalp;
+        private readonly List<Kalp> _kalpler = new List<Kalp>();
 
 
         #endregion
@@ -128,8 +128,15 @@ namespace Savas.Library.Concrete
 
         private void HizliHareket_Tick(object? sender, EventArgs e)
         {
-            if (_ucaksavar.yakalandiMi(_yildiz)) { YildizEfekti(); YildiziSil(); }
-            if (_ucaksavar.yakalandiMi(_kalp)) { KalpEfekti(); KalbiSil(); }
+            if (_ucaksavar.yakalandiMi(_yildiz)) { YildiziSil(); YildizEfekti();  }
+
+            for (var i = _kalpler.Count - 1; i >= 0; i--)
+            {
+                var kalp = _kalpler[i];
+                if (_ucaksavar.yakalandiMi(kalp)) { KalbiSil(kalp); KalpEfekti();  }
+
+            }
+           
             if (_ucaksavar.CarptiMi(_ucaklar) is not null) UcaksavarUcaklaCarpisti();
 
             MermilerinResimleriniDegistir();
@@ -206,38 +213,42 @@ namespace Savas.Library.Concrete
         private async void UcagiSil(Ucak ucak)
         {
             await Task.Delay(400);
-            if (kalpSansi.Next(0, 11) == 5) KalpOlustur(ucak.Center, ucak.Middle);
+            if (kalpSansi.Next(0, 30) == 1 && ucak is KucukUcak) KalpOlustur(ucak.Center, ucak.Middle);
             _ucaklar.Remove(ucak);
             _savasAlaniPanel.Controls.Remove(ucak);
-
-            
         }
 
         private void KalpOlustur(int center, int middle)
         {
-            _kalp = new Kalp(_savasAlaniPanel.Size, center, middle);
-            _savasAlaniPanel.Controls.Add(_kalp);
+            var kalp = new Kalp(_savasAlaniPanel.Size, center, middle);
+            _savasAlaniPanel.Controls.Add(kalp);
+            _kalpler.Add(kalp);
         }
 
         private void KalpleriHareketEttir()
         {
-            if (_kalp is null) return;
-            var carptiMi = _kalp.HareketEttir(Yon.Asagi);
-
-            if (carptiMi)
+            for (int i = _kalpler.Count - 1; i >= 0; i--)
             {
-                KalbiSil();
+                var kalp = _kalpler[i];
+                var carptiMi = kalp.HareketEttir(Yon.Asagi);
+                if (carptiMi)
+                {
+                    KalbiSil(kalp);
+                }
             }
         }
 
-        private void KalbiSil()
+   
+
+        private void KalbiSil(Kalp kalp)
         {
-            _savasAlaniPanel.Controls.Remove(_kalp);
-            _kalp = null;
+            _savasAlaniPanel.Controls.Remove(kalp);
+            _kalpler.Remove(kalp);
         }
 
         private void KalpEfekti()
         {
+
             _ucaksavar.Can += 20;
         }
 

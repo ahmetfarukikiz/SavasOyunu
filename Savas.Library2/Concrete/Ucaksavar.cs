@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using Savas.Library.myEventArgs;
+using System.Diagnostics;
 
 namespace Savas.Library2.Concrete
 {
@@ -30,10 +31,9 @@ namespace Savas.Library2.Concrete
             {
 
                 if (Can < 0) field = 0;
-                else if( Can > 100) field = 100;
+             
                 field = value;
                 if (Can < 0) field = 0;
-                else if (Can > 100) field = 100;
 
                 var e = new CanEventArgs();
                 e.Can = Can;
@@ -44,7 +44,6 @@ namespace Savas.Library2.Concrete
         {
             MermiHasari = 1;
        
-            Can = 100;
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
             Bottom = hareketAlaniBoyutlari.Height;
