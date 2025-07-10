@@ -22,7 +22,7 @@ internal abstract class Ucak : Cisim
 
     }
 
-    public virtual void UcagiPatlat()
+    public virtual void Patlat()
     {
         HareketMesafesi = (int)(Height * 0.10);
         Image = ResimYukleyici.GorselGetir($@"patlamisUcak.png");

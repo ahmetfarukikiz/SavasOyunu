@@ -16,7 +16,7 @@ namespace Savas.Library.Concrete
 
         }
 
-        public override void UcagiPatlat()
+        public override void Patlat()
         {
             HareketMesafesi = (int)(Height * 0.10);
             Image = ResimYukleyici.GorselGetir($@"patlamisKucukUcak.png");

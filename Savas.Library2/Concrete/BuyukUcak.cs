@@ -14,7 +14,7 @@ namespace Savas.Library.Concrete
             HareketMesafesi = (int)(Height * 0.07) + Random.Next(-2,2);
         }
 
-        public async override void UcagiPatlat()
+        public async override void Patlat()
         {
             var eskiHareketMesafesi = HareketMesafesi;
             HareketMesafesi = (int)(HareketMesafesi * 0.3);

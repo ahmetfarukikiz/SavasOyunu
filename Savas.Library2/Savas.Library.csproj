@@ -18,9 +18,16 @@
     <None Remove="Resimler\mermi3.png" />
     <None Remove="Resimler\patlamisBuyukUcak.png" />
     <None Remove="Resimler\patlamisKucukUcak.png" />
+    <None Remove="Resimler\patlamisUzaygemisi.png" />
     <None Remove="Resimler\space.png" />
     <None Remove="Resimler\Ucaksavar.png" />
+    <None Remove="Resimler\UcaksavarMermi.png" />
+    <None Remove="Resimler\Uzaygemisi.png" />
     <None Remove="Resimler\Yildiz.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resimler\patlamisUzaygemisi.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +42,8 @@
     <EmbeddedResource Include="Resimler\patlamisKucukUcak.png" />
     <EmbeddedResource Include="Resimler\space.png" />
     <EmbeddedResource Include="Resimler\Ucaksavar.png" />
+    <EmbeddedResource Include="Resimler\UcaksavarMermi.png" />
+    <EmbeddedResource Include="Resimler\Uzaygemisi.png" />
     <EmbeddedResource Include="Resimler\Yildiz.png" />
   </ItemGroup>
 
