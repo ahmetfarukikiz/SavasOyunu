@@ -23,14 +23,14 @@ namespace Savas.Library.Concrete
         private readonly Timer _KucukUcakOlusturmaTimer = new Timer { Interval = 2000 };
         private readonly Timer _BuyukUcakOlusturmaTimer = new Timer { Interval = 15000 };
         private readonly Timer _YildizOlusturmaTimer = new Timer { Interval = 26693 };
-        private readonly Timer _UzaygemisiOlusturmaTimer = new Timer { Interval = 30000 };
+        private readonly Timer _UzaygemisiOlusturmaTimer = new Timer { Interval = 37000 };
 
 
         Random kalpSansi = new Random();
         private TimeSpan _gecenSure;
         private readonly Panel _savasAlaniPanel;
         private Ucaksavar _ucaksavar;
-        private bool atesEdiliyor = false;
+        private bool ucaksavarAtesEdiyor = false;
         private readonly List<Mermi> _mermiler = new List<Mermi>();
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
         private Yildiz _yildiz;
@@ -52,7 +52,7 @@ namespace Savas.Library.Concrete
 
         #region Özellikler
         public bool DevamEdiyorMu { get; private set; } = false; //private set bu sınıftan atayaabiliriz değer
-        public int AtesGecikmesi { get; private set; } = DEFATESGECİKMESİ;
+        public int UcaksavarAtesGecikmesi { get; private set; } = DEFATESGECİKMESİ;
 
         public TimeSpan GecenSure
         {
@@ -92,7 +92,7 @@ namespace Savas.Library.Concrete
             _KucukUcakOlusturmaTimer.Tick += KucukUcakOlusturma_Tick;
             _YildizOlusturmaTimer.Tick += YildizOlusturma_Tick;
             _BuyukUcakOlusturmaTimer.Tick += BuyukUcakOlusturma_Tick;
-            PuanDegisti += PuanDegistiginde;
+            PuanDegisti += puanDegistiginde;
             _UzaygemisiOlusturmaTimer.Tick += UzaygemisiOlusturma_Tick;
 
 
@@ -114,16 +114,20 @@ namespace Savas.Library.Concrete
 
         public void UzaygemileriniHareketEttir()
         {
+ 
            foreach(var uzaygemisi in _uzaygemileri)
            {
                 var x = uzaygemisi.Center - _ucaksavar.Center;
                 var y = _ucaksavar.Middle - uzaygemisi.Middle;
 
+               
                 if (x > 15) uzaygemisi.HareketEttir(Yon.Sola);
                 else uzaygemisi.HareketEttir(Yon.Saga);
 
                 if (y > 500) uzaygemisi.HareketEttir(Yon.Asagi);
                 else uzaygemisi.HareketEttir(Yon.Yukari);
+
+                if ((x > 0 && x < 70) || (x < 0 && x > -70)) UzaygemileriniAtesEttir();
             }
         }
 
@@ -133,10 +137,10 @@ namespace Savas.Library.Concrete
             if(_ucaksavar.Can <= 0) Bitir();
         }
 
-        private void PuanDegistiginde(object? sender, EventArgs e)
+        private void puanDegistiginde(object? sender, EventArgs e)
         {
             if (Puan > 250) _UzaygemisiOlusturmaTimer.Start();
-            if (Puan == 100) _BuyukUcakOlusturmaTimer.Start();
+            if (Puan > 150) _BuyukUcakOlusturmaTimer.Start();
             if (Puan % 10 == 0 && _yavasHareketTimer.Interval > 50) _yavasHareketTimer.Interval -= 1;
         }
 
@@ -211,14 +215,26 @@ namespace Savas.Library.Concrete
 
         private void YavasHareketTimer_Tick(object sender, EventArgs e)
         {
+            
             UcaklarihareketEttir();
             VurulanUcaklariCikar();
             UzaygemileriniHareketEttir();
         }
 
+        private void UzaygemileriniAtesEttir()
+        {
+            foreach( var uzaygemisi in _uzaygemileri)
+            {
+               var mermi = uzaygemisi.AtesEt();
+                _savasAlaniPanel.Controls.Add(mermi);
+                _mermiler.Add(mermi);
+            }
+        }
+
 
         private void VurulanUcaklariCikar()
         {
+            
 
             for (var i = _uzaygemileri.Count - 1; i >= 0; i--)
             {
@@ -253,12 +269,20 @@ namespace Savas.Library.Concrete
 
                 Puan += ucak.Puan;
                 ucak.Patlat();
-                UcagiSil(ucak);
-                
-              
-               
-            
+                UcagiSil(ucak);            
             }
+
+
+            var vuranDusmanMermi = _ucaksavar.VurulduMu(_mermiler);
+            if (vuranDusmanMermi is null) return;
+
+            _ucaksavar.Can -= 10;
+            _mermiler.Remove(vuranDusmanMermi);
+            _savasAlaniPanel.Controls.Remove(vuranDusmanMermi);
+            if (_ucaksavar.Can > 0) return;
+
+
+
         }
 
         private async void UzaygemisiniSil(Uzaygemisi uzaygemisi)
@@ -338,7 +362,10 @@ namespace Savas.Library.Concrete
             for (int i = _mermiler.Count-1; i >= 0; i--) 
             {
                 var mermi = _mermiler[i];
-                var carptiMi = mermi.HareketEttir(Yon.Yukari);
+                bool carptiMi;
+                if(mermi is UcakSavarMermi)  carptiMi = mermi.HareketEttir(Yon.Yukari);
+                else carptiMi = mermi.HareketEttir(Yon.Asagi); 
+
                 if (carptiMi)
                 {
                     _mermiler.Remove(mermi);
@@ -355,16 +382,16 @@ namespace Savas.Library.Concrete
             }
         }
             
-        public async void AtesEt()
+        public async void UcaksavariAtesEttir()
         {
-            if (!DevamEdiyorMu || atesEdiliyor) return;
+            if (!DevamEdiyorMu || ucaksavarAtesEdiyor) return;
 
-            atesEdiliyor = true;
-            var mermi = new Mermi(_savasAlaniPanel.Size, _ucaksavar.Center, _ucaksavar.Top);
+            ucaksavarAtesEdiyor = true;
+            var mermi = new UcakSavarMermi(_savasAlaniPanel.Size, _ucaksavar.Center, _ucaksavar.Top);
             _mermiler.Add(mermi);
             _savasAlaniPanel.Controls.Add(mermi);
-            await Task.Delay(AtesGecikmesi);
-            atesEdiliyor = false;
+            await Task.Delay(UcaksavarAtesGecikmesi);
+            ucaksavarAtesEdiyor = false;
         }
 
         public void Baslat()
@@ -389,9 +416,12 @@ namespace Savas.Library.Concrete
         {
             _ucaklar.Clear();
             _mermiler.Clear();
+            _uzaygemileri.Clear();
+            _kalpler.Clear();
+            _yildiz = null;
             _savasAlaniPanel.Controls.Clear();
             GecenSure = TimeSpan.Zero;
-            AtesGecikmesi = DEFATESGECİKMESİ;
+            UcaksavarAtesGecikmesi = DEFATESGECİKMESİ;
             Puan = 0;
             UcaksavarOlustur();
 
@@ -460,9 +490,9 @@ namespace Savas.Library.Concrete
 
         private async void YildizEfekti()
         {
-            AtesGecikmesi = 70;
+            UcaksavarAtesGecikmesi = 70;
             await Task.Delay(7000); //7 sn sürecek
-            AtesGecikmesi = DEFATESGECİKMESİ;
+            UcaksavarAtesGecikmesi = DEFATESGECİKMESİ;
         }
 
         private void UcaksavarOlustur()

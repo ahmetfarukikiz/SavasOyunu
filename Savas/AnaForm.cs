@@ -80,7 +80,7 @@ namespace Savas
 
             if (_basiliTuslar.Contains(Keys.Space) || _basiliTuslar.Contains(Keys.L))
             {
-                _oyun.AtesEt();
+                _oyun.UcaksavariAtesEttir();
             }
         }
 

@@ -2,6 +2,7 @@
 using Savas.Library2.Concrete;
 using System.ComponentModel;
 using Savas.Library.Helpers;
+using Savas.Library.Concrete;
 
 namespace Savas.Library.Abstract;
 
@@ -28,10 +29,11 @@ internal abstract class Ucak : Cisim
         Image = ResimYukleyici.GorselGetir($@"patlamisUcak.png");
     }
 
-    public Mermi? VurulduMu(List<Mermi> mermiler)
+    public virtual Mermi? VurulduMu(List<Mermi> mermiler)
     {
         foreach(var mermi in mermiler)
         {
+            if (mermi is DusmanMermi) continue;
             var vurulduMu = (mermi.Left > Left && mermi.Left < Right || mermi.Right < Right && mermi.Right > Left)
             &&
             (mermi.Bottom < Bottom && mermi.Bottom > Top || mermi.Top > Top && mermi.Top < Bottom);

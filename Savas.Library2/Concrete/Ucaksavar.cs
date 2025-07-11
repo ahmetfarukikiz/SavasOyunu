@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Savas.Library.myEventArgs;
 using System.Diagnostics;
+using Savas.Library.Concrete;
 
 namespace Savas.Library2.Concrete
 {
@@ -22,28 +23,27 @@ namespace Savas.Library2.Concrete
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int MermiHasari { get; private set; }
        
+        private int _can;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Can 
-        { 
-            get => field;
+        {   
+            get => _can;
             set
             {
+                _can = value;
 
-                if (Can < 0) field = 0;
-             
-                field = value;
-                if (Can < 0) field = 0;
-
+                if(_can > 100) _can = 100;
+                if(_can < 0) _can = 0;
                 var e = new CanEventArgs();
-                e.Can = Can;
+                e.Can = _can;
                 CanDegisti?.Invoke(this, e);
             }
         }
         public Ucaksavar(int panelGenisligi, Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
-        {
+        {       
             MermiHasari = 1;
-       
+            Can = 100;
             Size = new Size(80, 80);
             Center = panelGenisligi / 2;
             Bottom = hareketAlaniBoyutlari.Height;
@@ -93,6 +93,21 @@ namespace Savas.Library2.Concrete
             await Task.Delay(300);
             HareketMesafesi = eskiHareketMesafesi;
             YatayHareketMesafesi = eskiYatayHareketMesafesi;
+        }
+
+
+        internal Mermi? VurulduMu(List<Mermi> mermiler)
+        {
+            foreach (var mermi in mermiler)
+            {
+                if (mermi is UcakSavarMermi) continue;
+                var vurulduMu = (mermi.Left > Left && mermi.Left < Right || mermi.Right < Right && mermi.Right > Left)
+                &&
+                (mermi.Bottom < Bottom && mermi.Bottom > Top || mermi.Top > Top && mermi.Top < Bottom);
+                if (vurulduMu) return mermi;
+            }
+
+            return null;
         }
     }
 }

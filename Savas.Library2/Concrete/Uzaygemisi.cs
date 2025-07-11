@@ -10,13 +10,14 @@ namespace Savas.Library.Concrete
 {
     class Uzaygemisi : Ucak
     {
+        private Size _hareketAlaniBoyutlari;
         public Uzaygemisi(Size hareketAlaniBoyutlari) : base(hareketAlaniBoyutlari)
         {
             Top = 10;
             Puan = 30;
             can = 10;
             YatayHareketMesafesi = 13;
-
+            _hareketAlaniBoyutlari = hareketAlaniBoyutlari;
             HareketMesafesi = 5;
         }
 
@@ -24,6 +25,13 @@ namespace Savas.Library.Concrete
         {
             HareketMesafesi = (int)(Height * 0.10);
             Image = ResimYukleyici.GorselGetir($@"patlamisUzaygemisi.png");
+        }
+
+
+        public DusmanMermi AtesEt()
+        {
+            var mermi = new DusmanMermi(_hareketAlaniBoyutlari, Center, Middle);
+            return mermi;
         }
     }
 }
