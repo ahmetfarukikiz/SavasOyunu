@@ -23,10 +23,14 @@ internal abstract class Ucak : Cisim
 
     }
 
-    public virtual void Patlat()
+    public async virtual Task Patlat()
     {
-        HareketMesafesi = (int)(Height * 0.10);
+        var eskiHareketMesafesi = HareketMesafesi;
+        HareketMesafesi = (int)(HareketMesafesi * 0.3);
         Image = ResimYukleyici.GorselGetir($@"patlamisUcak.png");
+        await Task.Delay(400);
+        Image = ResimYukleyici.GorselGetir($@"Ucak.png");
+        HareketMesafesi = eskiHareketMesafesi;
     }
 
     public virtual Mermi? VurulduMu(List<Mermi> mermiler)

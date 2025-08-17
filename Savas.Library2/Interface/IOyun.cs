@@ -10,7 +10,7 @@ namespace Savas.Library.Interface
         bool DevamEdiyorMu { get; }
         TimeSpan GecenSure { get; }
         void Baslat();
-        void UcaksavariAtesEttir();
+        Task UcaksavariAtesEttir();
         void UcaksavariHareketEttir(Yon yon);
 
 

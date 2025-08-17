@@ -16,10 +16,12 @@ namespace Savas.Library.Concrete
 
         }
 
-        public override void Patlat()
+        public async override Task Patlat()
         {
             HareketMesafesi = (int)(Height * 0.10);
             Image = ResimYukleyici.GorselGetir($@"patlamisKucukUcak.png");
+
+            await Task.Delay(1);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace Savas.Library2.Concrete
             return null;
         }
 
-        internal async void UcakSavarCarpti()
+        internal async Task UcakSavarCarpti()
         {
             var eskiHareketMesafesi = HareketMesafesi;
             var eskiYatayHareketMesafesi = YatayHareketMesafesi;

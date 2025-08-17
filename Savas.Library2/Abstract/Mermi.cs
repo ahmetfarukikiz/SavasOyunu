@@ -26,7 +26,7 @@ namespace Savas.Library.Abstract
             HareketMesafesi = (int)(Height * 1.5);
         }
 
-        public void AnimasyonluResimAyarla()
+        public virtual void AnimasyonluResimAyarla()
         {
             Image = ResimYukleyici.GorselGetir($@"{mermiResimleri[mermiResmiIndexi]}.png");
             if (mermiResmiIndexi < 2) mermiResmiIndexi++;

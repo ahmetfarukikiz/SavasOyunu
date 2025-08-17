@@ -37,6 +37,7 @@ namespace Savas.Library.Concrete
         private int _puan;
         private bool yeniCarpisildi;
         private bool yeniGecti;
+        private bool uzaygemisiAtesEdiyor = false;
         private readonly List<Kalp> _kalpler = new List<Kalp>();
         private readonly List<Uzaygemisi> _uzaygemileri = new List<Uzaygemisi>();
 
@@ -112,7 +113,7 @@ namespace Savas.Library.Concrete
             _uzaygemileri.Add(uzaygemisi);
         }
 
-        public void UzaygemileriniHareketEttir()
+        public async Task UzaygemileriniHareketEttir()
         {
  
            foreach(var uzaygemisi in _uzaygemileri)
@@ -127,7 +128,10 @@ namespace Savas.Library.Concrete
                 if (y > 500) uzaygemisi.HareketEttir(Yon.Asagi);
                 else uzaygemisi.HareketEttir(Yon.Yukari);
 
+                uzaygemisiAtesEdiyor = true;
+                await Task.Delay(100);
                 if ((x > 0 && x < 70) || (x < 0 && x > -70)) UzaygemileriniAtesEttir();
+                uzaygemisiAtesEdiyor = false;
             }
         }
 
@@ -180,7 +184,7 @@ namespace Savas.Library.Concrete
             KalpleriHareketEttir();
         }
 
-        private async void UcaksavarUcaklaCarpisti()
+        private async Task UcaksavarUcaklaCarpisti()
         {
             if (yeniCarpisildi == true) return;
             yeniCarpisildi = true;
@@ -220,7 +224,7 @@ namespace Savas.Library.Concrete
             VurulanUcaklariCikar();
             UzaygemileriniHareketEttir();
         }
-
+        
         private void UzaygemileriniAtesEttir()
         {
             foreach( var uzaygemisi in _uzaygemileri)
@@ -285,7 +289,7 @@ namespace Savas.Library.Concrete
 
         }
 
-        private async void UzaygemisiniSil(Uzaygemisi uzaygemisi)
+        private async Task UzaygemisiniSil(Uzaygemisi uzaygemisi)
         {
             await Task.Delay(400);
             _uzaygemileri.Remove(uzaygemisi);
@@ -294,7 +298,7 @@ namespace Savas.Library.Concrete
 
 
 
-        private async void UcagiSil(Ucak ucak)
+        private async Task UcagiSil(Ucak ucak)
         {
             await Task.Delay(400);
             if (kalpSansi.Next(0, 30) == 1 && ucak is KucukUcak) KalpOlustur(ucak.Center, ucak.Middle);
@@ -382,7 +386,7 @@ namespace Savas.Library.Concrete
             }
         }
             
-        public async void UcaksavariAtesEttir()
+        public async Task UcaksavariAtesEttir()
         {
             if (!DevamEdiyorMu || ucaksavarAtesEdiyor) return;
 
@@ -488,7 +492,7 @@ namespace Savas.Library.Concrete
             _yildiz = null;
         }
 
-        private async void YildizEfekti()
+        private async Task YildizEfekti()
         {
             UcaksavarAtesGecikmesi = 70;
             await Task.Delay(7000); //7 sn sürecek

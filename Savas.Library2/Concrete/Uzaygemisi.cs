@@ -21,10 +21,14 @@ namespace Savas.Library.Concrete
             HareketMesafesi = 5;
         }
 
-        public override void Patlat()
+        public async override Task Patlat()
         {
-            HareketMesafesi = (int)(Height * 0.10);
+            var eskiHareketMesafesi = HareketMesafesi;
+            HareketMesafesi = (int)(HareketMesafesi * 0.3);
             Image = ResimYukleyici.GorselGetir($@"patlamisUzaygemisi.png");
+            await Task.Delay(400);
+            Image = ResimYukleyici.GorselGetir($@"Uzaygemisi.png");
+            HareketMesafesi = eskiHareketMesafesi;
         }
 
 
