@@ -4,13 +4,13 @@
 Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak geliştirdiğim oyun projem.
 
 Videodaki temel yapının üzerine şunları ekleyerek projeyi özgünleştirdim:
-*  **2 Boyutlu Hareket:** UçakSavarımız artık bir jet! Sadece sağa-sola değil, yukarı aşağı da hareket edebilir.
-*  **Aktif Düşmanlar:** Sadece düz gelen uçaklar değil, saldırı yapan UFO'lar eklendi.
+*  **2 Boyutlu Hareket:** Oyundaki uçaksavar artık yukarı aşağı da hareket edebilir.
+*  **Aktif Düşmanlar:** Oyuncuyu aktif olarak takip edip ateş edebilen Uzay Gemileri'lar eklendi.
 *  **Yeni Nesneler:** Can ve Yıldız gibi özellik kazandıran nesneler eklendi.
 *  **Animasyonlar:** Vurulan uçaklar için patlama efekti ve mermi animasyonu eklendi.
 
 ## 🎯 Oyun Konsepti
-* Oyundaki amacımız bir savaş jeti (uçaksavar) olarak hava sahasının karşı tarafına geçmeye çalışan pasif (büyük, küçük uçaklar) ve aktif (ufo) düşmanları mermilerimizle 
+* Oyundaki amacımız bir savaş jeti (uçaksavar) olarak hava sahasının karşı tarafına geçmeye çalışan pasif (büyük, küçük uçaklar) ve aktif (Uzay gemisi) düşmanları mermilerimizle 
 etkisiz hale getirmek. Karşı tarafa ulaşan her düşman ve bize isabet eden her düşman mermisi canımızın gitmesine sebep olmaktadır. Oyun boyunca düşman
 uçakların yanında bize güç sağlayan çeşitli nesneler de karşımıza çıkmaktadır. (can, yıldız) 
 
