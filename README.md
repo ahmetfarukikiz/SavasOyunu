@@ -1,18 +1,18 @@
-# ✈️ Savaş Oyunu 
+# Savaş Oyunu 
 
 ## 📝 Proje Hakkında
-Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak ve geliştirerek oluşturduğum oyun projem.
+Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak ve geliştirdiğim oyun projem.
 
 Videodaki temel yapının üzerine şunları ekleyerek projeyi özgünleştirdim:
-* 🚀 **2 Boyutlu Hareket:** UçakSavarımız artık bir jet! Sadece sağa-sola değil, yukarı aşağı da hareket edebilir.
-* 🛸 **Aktif Düşmanlar:** Sadece düz gelen uçaklar değil, saldırı yapan UFO'lar eklendi.
-* ❤️ **Power-up Sistemi:** Can ve Yıldız gibi özellik kazandıran nesneler eklendi.
-* 💥 **Animasyonlar** Vurulan uçaklar için patlama efekti ve mermi animasyonu eklendi.
+*  **2 Boyutlu Hareket:** UçakSavarımız artık bir jet! Sadece sağa-sola değil, yukarı aşağı da hareket edebilir.
+*  **Aktif Düşmanlar:** Sadece düz gelen uçaklar değil, saldırı yapan UFO'lar eklendi.
+*  **Yeni Nesneler:** Can ve Yıldız gibi özellik kazandıran nesneler eklendi.
+*  **Animasyonlar:** Vurulan uçaklar için patlama efekti ve mermi animasyonu eklendi.
 
 ## 🎯 Oyun Konsepti
 * Oyundaki amacımız bir savaş jeti (uçaksavar) olarak hava sahasının karşı tarafına geçmeye çalışan pasif (büyük, küçük uçaklar) ve aktif (ufo) düşmanları mermilerimizle 
 etkisiz hale getirmek. Karşı tarafa ulaşan her düşman ve bize isabet eden her düşman mermisi canımızın gitmesine sebep olmaktadır. Oyun boyunca düşman
-uçaklarla beraber bize güç sağlayan çeşitli özellikler de karşımıza çıkmaktadır. (can, yıldız) 
+uçakların yanında bize güç sağlayan çeşitli nesneler de karşımıza çıkmaktadır. (can, yıldız) 
 
 
 ## 🏗️ Mimari ve Teknolojiler
