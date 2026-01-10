@@ -1,4 +1,4 @@
-# Savaş Oyunu 
+# ✈️ Savaş Oyunu 
 
 ## 📝 Proje Hakkında
 Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak ve geliştirdiğim oyun projem.
