@@ -59,6 +59,9 @@ Kod tekrarını önlemek ve yönetilebilirliği artırmak için şu miras yapıs
   <img src="https://github.com/ahmetfarukikiz/SavasOyunu/blob/master/gorseller/oyun3.png?raw=true" alt="Oyun Görüntüsü 3" width="600">
   <br><br>
 
+  <img src="https://github.com/ahmetfarukikiz/SavasOyunu/blob/master/gorseller/oyun5.png?raw=true" alt="Oyun Görüntüsü 5" width="600">
+  <br><br>
+
   <img src="https://github.com/ahmetfarukikiz/SavasOyunu/blob/master/gorseller/oyun4.png?raw=true" alt="Oyun Görüntüsü 4" width="600">
 
 </div>
