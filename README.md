@@ -5,7 +5,7 @@ Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[
 
 Videodaki temel yapının üzerine şunları ekleyerek projeyi özgünleştirdim:
 *  **2 Boyutlu Hareket:** Oyundaki uçaksavar artık yukarı aşağı da hareket edebilir.
-*  **Aktif Düşmanlar:** Oyuncuyu aktif olarak takip edip ateş edebilen Uzay Gemileri'lar eklendi.
+*  **Aktif Düşmanlar:** Oyuncuyu aktif olarak takip edip ateş edebilen Uzay Gemileri eklendi.
 *  **Yeni Nesneler:** Can ve Yıldız gibi özellik kazandıran nesneler eklendi.
 *  **Animasyonlar:** Vurulan uçaklar için patlama efekti ve mermi animasyonu eklendi.
 
