@@ -1,7 +1,7 @@
 # ✈️ Savaş Oyunu 
 
 ## 📝 Proje Hakkında
-Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde Sinan İlyas hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak geliştirdiğim oyun projem.
+Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde [Sinan İlyas](https://github.com/sinanilyas) hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak geliştirdiğim oyun projem.
 
 Videodaki temel yapının üzerine şunları ekleyerek projeyi özgünleştirdim:
 *  **2 Boyutlu Hareket:** Oyundaki uçaksavar artık yukarı aşağı da hareket edebilir.
