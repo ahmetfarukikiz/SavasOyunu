@@ -1,5 +1,7 @@
 # ✈️ Savaş Oyunu 
 
+📥 [Savaş Oyunu v0.2.0 Alpha'yı İndir (.exe)](https://github.com/ahmetfarukikiz/SavasOyunu/releases/download/v0.2.0-alpha/UcakOyunuKurulum.exe)
+
 ## 📝 Proje Hakkında
 Bilgisayar Mühendisliği öğrenciliğimin 1.senesinde [Sinan İlyas](https://github.com/sinanilyas) hocamın "[C# ile NDP Örneği] Savaş Oyunu" youtube videosundaki örneğin üzerine eklemeler yaparak geliştirdiğim oyun projem.
 
